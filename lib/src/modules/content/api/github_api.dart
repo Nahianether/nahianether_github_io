@@ -11,7 +11,7 @@ class GithubApi {
     var request = httpsss.Request(
         'GET',
         Uri.parse(
-            'https://api.github.com/users/sabikrahat/repos?page=1&per_page=100'));
+            'https://api.github.com/users/Nahianether/repos?page=1&per_page=100'));
 
     httpsss.StreamedResponse response = await request.send();
     var body = await response.stream.bytesToString();
