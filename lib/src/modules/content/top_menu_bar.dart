@@ -5,7 +5,6 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../constants/constants.dart';
 import '../../constants/size_config/responsive.dart';
 
-
 class TopMenuBar extends StatelessWidget {
   const TopMenuBar({
     Key? key,
@@ -21,9 +20,7 @@ class TopMenuBar extends StatelessWidget {
         margin: EdgeInsets.zero,
         child: Padding(
           padding: EdgeInsets.symmetric(
-              horizontal:
-                  Responsive.isDesktop(context) ? defaultPadding * 2 : 0,
-              vertical: defaultPadding * 0.5),
+              horizontal: Responsive.isDesktop(context) ? defaultPadding * 2 : 0, vertical: defaultPadding * 0.5),
           child: Row(
             children: [
               if (Responsive.isMobile(context))
@@ -32,15 +29,13 @@ class TopMenuBar extends StatelessWidget {
                     width: 35,
                     child: SvgPicture.asset(
                       'assets/svgs/menu.svg',
-                      colorFilter:
-                          const ColorFilter.mode(Colors.cyan, BlendMode.srcIn),
+                      colorFilter: const ColorFilter.mode(Colors.cyan, BlendMode.srcIn),
                     ),
                   ),
                   onTap: () => Scaffold.of(context).openDrawer(),
                 ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10),
+                padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10),
                 child: Image.asset('assets/icons/splash-icon.png'),
               ),
               const SizedBox(width: defaultPadding * 0.7),
@@ -48,7 +43,7 @@ class TopMenuBar extends StatelessWidget {
                 TextSpan(
                   children: [
                     TextSpan(
-                      text: "Portfoli",
+                      text: 'Portfoli',
                       style: TextStyle(
                         fontSize: 18.0,
                         letterSpacing: 0.55,
@@ -73,24 +68,18 @@ class TopMenuBar extends StatelessWidget {
                   children: [
                     TopBarButton(
                         label: 'Home',
-                        onPressed: () async => await Scrollable.ensureVisible(
-                            topIntroSectionKey.currentContext!,
-                            duration: const Duration(milliseconds: 1000),
-                            curve: Curves.easeInOutCubic)),
+                        onPressed: () async => await Scrollable.ensureVisible(topIntroSectionKey.currentContext!,
+                            duration: const Duration(milliseconds: 1000), curve: Curves.easeInOutCubic)),
                     const SizedBox(width: defaultPadding),
                     TopBarButton(
                         label: 'About',
-                        onPressed: () async => await Scrollable.ensureVisible(
-                            aboutSectionKey.currentContext!,
-                            duration: const Duration(milliseconds: 1000),
-                            curve: Curves.easeInOutCubic)),
+                        onPressed: () async => await Scrollable.ensureVisible(aboutSectionKey.currentContext!,
+                            duration: const Duration(milliseconds: 1000), curve: Curves.easeInOutCubic)),
                     const SizedBox(width: defaultPadding),
                     TopBarButton(
                         label: 'Recent Works',
-                        onPressed: () async => await Scrollable.ensureVisible(
-                            recentWorksSectionKey.currentContext!,
-                            duration: const Duration(milliseconds: 1000),
-                            curve: Curves.easeInOutCubic)),
+                        onPressed: () async => await Scrollable.ensureVisible(recentWorksSectionKey.currentContext!,
+                            duration: const Duration(milliseconds: 1000), curve: Curves.easeInOutCubic)),
                     // const SizedBox(width: defaultPadding),
                     // TopBarButton(
                     //     label: 'Collaboration',
@@ -101,18 +90,16 @@ class TopMenuBar extends StatelessWidget {
                     const SizedBox(width: defaultPadding),
                     TopBarButton(
                         label: 'Contact',
-                        onPressed: () async => await Scrollable.ensureVisible(
-                            contactSectionKey.currentContext!,
-                            duration: const Duration(milliseconds: 1000),
-                            curve: Curves.easeInOutCubic)),
+                        onPressed: () async => await Scrollable.ensureVisible(contactSectionKey.currentContext!,
+                            duration: const Duration(milliseconds: 1000), curve: Curves.easeInOutCubic)),
                     const SizedBox(width: defaultPadding),
                     TopBarButton(
                       label: 'Personal Blogs',
                       onPressed: () async {
-                        String link = 'https://sabikrahat72428.blogspot.com/';
-                        if (!await launchUrl(Uri.parse(link))) {
-                          throw 'Could not launch';
-                        }
+                        // String link = 'https://sabikrahat72428.blogspot.com/';
+                        // if (!await launchUrl(Uri.parse(link))) {
+                        //   throw 'Could not launch';
+                        // }
                       },
                     ),
                   ],
@@ -127,10 +114,10 @@ class TopMenuBar extends StatelessWidget {
 
 class TopBarButton extends StatelessWidget {
   const TopBarButton({
-    Key? key,
+    super.key,
     required this.label,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   final String label;
   final void Function()? onPressed;
@@ -140,16 +127,11 @@ class TopBarButton extends StatelessWidget {
     return ElevatedButton(
         style: ButtonStyle(
             elevation: MaterialStateProperty.all<double>(1.0),
-            foregroundColor:
-                MaterialStateProperty.all<Color>(const Color(0xFFf7f8fa)),
-            backgroundColor:
-                MaterialStateProperty.all<Color>(const Color(0xFFf7f8fa)),
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
-                    side: const BorderSide(color: kDefaultColor, width: 1.0)))),
+            foregroundColor: MaterialStateProperty.all<Color>(const Color(0xFFf7f8fa)),
+            backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFFf7f8fa)),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(18.0), side: const BorderSide(color: kDefaultColor, width: 1.0)))),
         onPressed: onPressed,
-        child:
-            Text(label, style: const TextStyle(fontSize: 13.0, color: black)));
+        child: Text(label, style: const TextStyle(fontSize: 13.0, color: black)));
   }
 }

@@ -3,7 +3,6 @@ import 'package:intl/intl.dart';
 
 const appName = 'flutter_app';
 
-
 const Color white = Colors.white;
 const Color black = Colors.black;
 const Color kDefaultColor = Color(0xFF50afc0);
@@ -42,16 +41,14 @@ final skills = [
   'Flutter',
   'Dart',
   'Android',
-  'ios',
-  'git',
   'Java',
-  'Django',
-  'Python',
+  'Rust',
+  'C/C++',
+  'PHP',
+  'Database',
   'HTML',
   'CSS',
-  'Bootstrap',
-  'Web',
-  'Adobe illustrator',
+  'Web Development',
 ];
 
 const defaultPadding = 20.0;
@@ -74,11 +71,9 @@ final kDefaultShadow = BoxShadow(
 const String webViewUserAgent =
     'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.192 Safari/537.36';
 
-final RegExp emailValidatorRegExp =
-    RegExp(r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+');
+final RegExp emailValidatorRegExp = RegExp(r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+');
 
-final RegExp emailPhoneValidatorRegExp =
-    RegExp(r'^([0-9]{9})|([A-Za-z0-9._%\+\-]+@[a-z0-9.\-]+\.[a-z]{2,3})$');
+final RegExp emailPhoneValidatorRegExp = RegExp(r'^([0-9]{9})|([A-Za-z0-9._%\+\-]+@[a-z0-9.\-]+\.[a-z]{2,3})$');
 
 //SignUp Form Error
 const String kEmailNullError = 'Please Enter your email';
@@ -114,6 +109,7 @@ Map<String, String> headers = {
 
 ///
 const isGlobalMaintainence = false;
+
 ///
 
 final topMenubarSectionKey = GlobalKey();

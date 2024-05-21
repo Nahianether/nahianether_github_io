@@ -12,8 +12,8 @@ import '../../content/top_menu_bar.dart';
 
 class MobileBody extends StatelessWidget {
   const MobileBody({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

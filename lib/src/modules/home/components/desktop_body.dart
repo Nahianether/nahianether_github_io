@@ -11,7 +11,7 @@ import '../../content/top_menu_bar.dart';
 import '../../service-break/service_break_banner.dart';
 
 class DesktopBody extends StatefulWidget {
-  const DesktopBody({Key? key}) : super(key: key);
+  const DesktopBody({super.key});
 
   @override
   State<DesktopBody> createState() => _BodyState();

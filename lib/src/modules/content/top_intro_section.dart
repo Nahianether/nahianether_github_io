@@ -27,7 +27,7 @@ class TopIntroSection extends StatelessWidget {
                   TextSpan(
                     children: [
                       TextSpan(
-                        text: "Md. Sabik Alam ",
+                        text: 'Intishar-Ul Islam ',
                         style: TextStyle(
                           fontSize: 28,
                           letterSpacing: 0.65,
@@ -35,7 +35,7 @@ class TopIntroSection extends StatelessWidget {
                         ),
                       ),
                       TextSpan(
-                        text: 'Rahat',
+                        text: 'Ether',
                         style: TextStyle(
                           fontSize: 28,
                           letterSpacing: 0.65,
@@ -60,7 +60,7 @@ class TopIntroSection extends StatelessWidget {
                         ),
                       ),
                       TextSpan(
-                        text: "from Dhaka, Bangladesh.",
+                        text: 'from Bangladesh.',
                         style: TextStyle(
                           fontSize: 14,
                           letterSpacing: 0.6,
@@ -71,7 +71,7 @@ class TopIntroSection extends StatelessWidget {
                 ),
                 const SizedBox(height: defaultPadding * 0.5),
                 const Text(
-                  'Focused professional having excellent technical and communication skills, and offering almost 4 years of experience in Computer industry. Proficient at designing and formulating test automation frameworks, writing code in various languages, feature development and implementation. Specialize in thinking outside the box to find unique solutions to difficult engineering problems.',
+                  'Currently I am working as a Senior Software Engineer Flutter at Algorithm Generation Limited (AGL). I finished my study from United International University in the Department of Computer Science and Engineering (CSE) at 2019.\nI like to work with technology.',
                   style: TextStyle(
                     fontSize: 13.0,
                     color: bodyTextColor,
@@ -138,14 +138,14 @@ class TopIntroSection extends StatelessWidget {
                 //   ),
                 // ),
                 const SizedBox(height: defaultPadding * 0.5),
-                if (!Responsive.isDesktop(context)) Image.asset("assets/gifs/programmer.gif"),
+                if (!Responsive.isDesktop(context)) Image.asset('assets/gifs/programmer.gif'),
               ],
             ),
           ),
           if (Responsive.isDesktop(context))
             Expanded(
               flex: 4,
-              child: Image.asset("assets/gifs/programmer.gif"),
+              child: Image.asset('assets/gifs/programmer.gif'),
             ),
         ],
       ),

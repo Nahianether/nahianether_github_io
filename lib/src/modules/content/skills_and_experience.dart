@@ -60,7 +60,7 @@ class Skills extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.symmetric(vertical: defaultPadding),
             child: Text(
-              "Skills",
+              'Skills',
               style: TextStyle(
                 fontSize: 20.0,
                 color: Colors.black87,
@@ -76,7 +76,7 @@ class Skills extends StatelessWidget {
               const Expanded(
                 child: AnimatedCircularProgressIndicator(
                   percentage: 0.75,
-                  label: "Flutter",
+                  label: 'Flutter',
                 ),
               ),
               SizedBox(
@@ -86,7 +86,7 @@ class Skills extends StatelessWidget {
               const Expanded(
                 child: AnimatedCircularProgressIndicator(
                   percentage: 0.6,
-                  label: "Django",
+                  label: 'Django',
                 ),
               ),
               SizedBox(
@@ -96,7 +96,7 @@ class Skills extends StatelessWidget {
               const Expanded(
                 child: AnimatedCircularProgressIndicator(
                   percentage: 0.65,
-                  label: "Firebase",
+                  label: 'Firebase',
                 ),
               ),
               SizedBox(
@@ -106,7 +106,7 @@ class Skills extends StatelessWidget {
               const Expanded(
                 child: AnimatedCircularProgressIndicator(
                   percentage: 0.55,
-                  label: "Android",
+                  label: 'Android',
                 ),
               ),
               SizedBox(
@@ -116,7 +116,7 @@ class Skills extends StatelessWidget {
               const Expanded(
                 child: AnimatedCircularProgressIndicator(
                   percentage: 0.85,
-                  label: "Git VCS",
+                  label: 'Git VCS',
                 ),
               ),
             ],
@@ -124,7 +124,7 @@ class Skills extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.symmetric(vertical: defaultPadding),
             child: Text(
-              "Coding",
+              'Coding',
               style: TextStyle(
                 fontSize: 20.0,
                 color: Colors.black87,
@@ -135,27 +135,27 @@ class Skills extends StatelessWidget {
           ),
           const AnimatedLinearProgressIndicator(
             percentage: 0.75,
-            label: "Dart",
+            label: 'Dart',
           ),
           const AnimatedLinearProgressIndicator(
             percentage: 0.6,
-            label: "Python",
+            label: 'Python',
           ),
           const AnimatedLinearProgressIndicator(
             percentage: 0.8,
-            label: "Java",
+            label: 'Java',
           ),
           const AnimatedLinearProgressIndicator(
             percentage: 0.65,
-            label: "HTML",
+            label: 'HTML',
           ),
           const AnimatedLinearProgressIndicator(
             percentage: 0.5,
-            label: "CSS",
+            label: 'CSS',
           ),
           const AnimatedLinearProgressIndicator(
             percentage: 0.4,
-            label: "Bootstrap",
+            label: 'Bootstrap',
           ),
         ],
       ),
@@ -183,7 +183,7 @@ class Experience extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.symmetric(vertical: defaultPadding),
             child: Text(
-              "Experience",
+              'Experience',
               style: TextStyle(
                 fontSize: 20.0,
                 color: Colors.black87,
@@ -193,7 +193,7 @@ class Experience extends StatelessWidget {
             ),
           ),
           const Text(
-            "Playing with software development for the last 3 years (almost) & trying to update me daily with the new technologies.",
+            'Playing with software development for the last 4 and half years (almost) & trying to update me daily with the new technologies.',
             style: TextStyle(
               fontSize: 11.5,
               color: bodyTextColor,
@@ -428,8 +428,8 @@ class Experience extends StatelessWidget {
                                                             .designations[idx]
                                                             .endDate !=
                                                         null
-                                                    ? "${getFormatedDate(experiences[index].designations[idx].startDate)} - ${getFormatedDate(experiences[index].designations[idx].endDate!)} • ${diffDate(startDate: experiences[index].designations[idx].startDate, endDate: experiences[index].designations[idx].endDate!)}"
-                                                    : "${getFormatedDate(experiences[index].designations[idx].startDate)} - Present • ${diffDate(startDate: experiences[index].designations[idx].startDate, endDate: DateTime.now())}"),
+                                                    ? '${getFormatedDate(experiences[index].designations[idx].startDate)} - ${getFormatedDate(experiences[index].designations[idx].endDate!)} • ${diffDate(startDate: experiences[index].designations[idx].startDate, endDate: experiences[index].designations[idx].endDate!)}'
+                                                    : '${getFormatedDate(experiences[index].designations[idx].startDate)} - Present • ${diffDate(startDate: experiences[index].designations[idx].startDate, endDate: DateTime.now())}'),
                                                 maxLines: 1,
                                                 overflow: TextOverflow.ellipsis,
                                                 style: const TextStyle(
