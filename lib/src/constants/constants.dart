@@ -51,6 +51,24 @@ final skills = [
   'Web Development',
 ];
 
+final officeProjects = [
+  'AGGS',
+  'GariBook(Client & Driver)',
+  'Clerk File Share',
+  'Probashi',
+  'AG E-commerce',
+  'Point Of Sale(POS)',
+  'Like Dislike(Tinder Copy)',
+  'Meeting Schedule',
+  'Clerk',
+  'Team Wave',
+  'D\'Arrigo Brothers(DAB)',
+  'Dhaka Boss Merchant App',
+  'Dhaka Boss Shopping App',
+  'Dhaka Boss Ticketing App',
+  'Smart Car Parking System',
+];
+
 const defaultPadding = 20.0;
 const defaultDuration = Duration(seconds: 1);
 const maxWidth = 1400.0;
