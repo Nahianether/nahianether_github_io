@@ -51,9 +51,9 @@ class ContactBox extends StatelessWidget {
               SocalCard(
                 color: const Color(0xFFD9FFFC),
                 iconSrc: 'assets/images/telegram.png',
-                name: 'sabikrahat',
+                name: 'Intishar-Ul Islam',
                 onTap: () async {
-                  if (!await launchUrl(Uri.parse('https://t.me/sabikrahat'))) {
+                  if (!await launchUrl(Uri.parse('https://t.me/nahinxp21'))) {
                     throw 'Could not launch';
                   }
                 },
@@ -61,9 +61,9 @@ class ContactBox extends StatelessWidget {
               SocalCard(
                 color: const Color(0xFFE4FFC7),
                 iconSrc: 'assets/images/whatsapp.png',
-                name: 'Md. Sabik Alam Rahat',
+                name: 'Intishar-Ul Islam',
                 onTap: () async {
-                  if (!await launchUrl(Uri.parse('https://wa.me/8801647629698'))) {
+                  if (!await launchUrl(Uri.parse('https://wa.me/8801687722962'))) {
                     throw 'Could not launch';
                   }
                 },
@@ -71,9 +71,9 @@ class ContactBox extends StatelessWidget {
               SocalCard(
                 color: const Color(0xFFE8F0F9),
                 iconSrc: 'assets/images/messanger.png',
-                name: 'Md. Sabik Alam Rahat',
+                name: 'Intishar-Ul Islam',
                 onTap: () async {
-                  if (!await launchUrl(Uri.parse('https://m.me/sabikrahat'))) {
+                  if (!await launchUrl(Uri.parse('https://m.me/nahinxp21'))) {
                     throw 'Could not launch';
                   }
                 },

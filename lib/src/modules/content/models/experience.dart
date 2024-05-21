@@ -62,4 +62,30 @@ List<Experience> experiences = [
     imgPath: 'assets/experiences/app-coder-xyz.png',
     location: 'Dhaka, Bangladesh',
   ),
+  Experience(
+    designations: [
+      Designation(
+        title: 'Junior Flutter Developer',
+        startDate: DateTime.parse('2020-03-01 00:00:00.000'),
+        endDate: DateTime.parse('2020-12-01 00:00:00.000'),
+      ),
+    ],
+    companyName: 'Dhaka Boss Pvt. Limited',
+    link: 'https://www.facebook.com/dhakabosss/',
+    imgPath: 'assets/experiences/Dhaka-boss.png',
+    location: 'Dhaka, Bangladesh',
+  ),
+  Experience(
+    designations: [
+      Designation(
+        title: 'Guest Employee',
+        startDate: DateTime.parse('2018-10-01 00:00:00.000'),
+        endDate: DateTime.parse('2019-06-01 00:00:00.000'),
+      ),
+    ],
+    companyName: 'PiLabs Bd. Limited',
+    link: 'https://www.pilabsbd.com/',
+    imgPath: 'assets/experiences/pilabs.png',
+    location: 'Dhaka, Bangladesh',
+  ),
 ];

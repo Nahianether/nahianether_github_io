@@ -7,9 +7,9 @@ import 'models/works.dart';
 
 class RecentWorkCard extends StatefulWidget {
   const RecentWorkCard({
-    Key? key,
+    super.key,
     required this.index,
-  }) : super(key: key);
+  });
 
   final int index;
 
@@ -69,7 +69,7 @@ class RecentWorkCardState extends State<RecentWorkCard> {
                     ),
                     const SizedBox(height: defaultPadding),
                     const Text(
-                      "View Details",
+                      'View Details',
                       style: TextStyle(decoration: TextDecoration.underline),
                     )
                   ],

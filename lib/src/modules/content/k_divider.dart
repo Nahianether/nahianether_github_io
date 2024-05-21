@@ -5,8 +5,8 @@ import '../../constants/size_config/responsive.dart';
 
 class KDivider extends StatelessWidget {
   const KDivider({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

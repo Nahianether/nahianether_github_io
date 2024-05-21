@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'components/body.dart' show ServiceBreakBody;
 
 class ServiceBreak extends StatelessWidget {
-  const ServiceBreak({Key? key}) : super(key: key);
+  const ServiceBreak({super.key});
 
   @override
   Widget build(BuildContext context) {

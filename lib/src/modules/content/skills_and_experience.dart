@@ -9,8 +9,8 @@ import 'models/experience.dart';
 
 class SkillsAndExperience extends StatelessWidget {
   const SkillsAndExperience({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -46,21 +46,20 @@ class SkillsAndExperience extends StatelessWidget {
 
 class Skills extends StatelessWidget {
   const Skills({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(
-          right: Responsive.isDesktop(context) ? defaultPadding * 2 : 0),
+      padding: EdgeInsets.only(right: Responsive.isDesktop(context) ? defaultPadding * 2 : 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Padding(
             padding: EdgeInsets.symmetric(vertical: defaultPadding),
             child: Text(
-              'Skills',
+              'Skills & Coding',
               style: TextStyle(
                 fontSize: 20.0,
                 color: Colors.black87,
@@ -70,93 +69,278 @@ class Skills extends StatelessWidget {
             ),
           ),
           Row(
-            mainAxisSize: MainAxisSize.min,
-            // mainAxisAlignment: mainSpaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Expanded(
-                child: AnimatedCircularProgressIndicator(
-                  percentage: 0.75,
-                  label: 'Flutter',
-                ),
+              const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '1. Flutter',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                  Text(
+                    '          1. State Management',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                  Text(
+                    '                    1. State Management',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                  Text(
+                    '                    2. State Management',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                  Text(
+                    '          2. DB',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                  Text(
+                    '                    1. Isar, Hive',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                  Text(
+                    '                    2. Firebase',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                  Text(
+                    '          3. Multi-Threading',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                  Text(
+                    '          4. FFi with Rust, and C',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                  Text(
+                    '          5. Method Chanel',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                  Text(
+                    '          6. Custom Painting',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                  Text(
+                    '          7. API integration',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                  Text(
+                    '          8. Custom Animation',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                  Text(
+                    '2. Dart',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                  Text(
+                    '3. Android',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                  Text(
+                    '4. Rust',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                  Text(
+                    '5. JAVA',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                  Text(
+                    '6. C/C++',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                ],
               ),
-              SizedBox(
-                  width: Responsive.isDesktop(context)
-                      ? defaultPadding * 2
-                      : defaultPadding),
-              const Expanded(
-                child: AnimatedCircularProgressIndicator(
-                  percentage: 0.6,
-                  label: 'Django',
-                ),
-              ),
-              SizedBox(
-                  width: Responsive.isDesktop(context)
-                      ? defaultPadding * 2
-                      : defaultPadding),
-              const Expanded(
-                child: AnimatedCircularProgressIndicator(
-                  percentage: 0.65,
-                  label: 'Firebase',
-                ),
-              ),
-              SizedBox(
-                  width: Responsive.isDesktop(context)
-                      ? defaultPadding * 2
-                      : defaultPadding),
-              const Expanded(
-                child: AnimatedCircularProgressIndicator(
-                  percentage: 0.55,
-                  label: 'Android',
-                ),
-              ),
-              SizedBox(
-                  width: Responsive.isDesktop(context)
-                      ? defaultPadding * 2
-                      : defaultPadding),
-              const Expanded(
-                child: AnimatedCircularProgressIndicator(
-                  percentage: 0.85,
-                  label: 'Git VCS',
-                ),
+              Row(
+                children: [
+                  Column(
+                    children: [
+                      const SizedBox(
+                        height: 130,
+                        width: 100,
+                        child: AnimatedCircularProgressIndicator(
+                          percentage: 0.6,
+                          label: 'Flutter',
+                        ),
+                      ),
+                      SizedBox(height: Responsive.isDesktop(context) ? defaultPadding * 2 : defaultPadding),
+                      const SizedBox(
+                        height: 130,
+                        width: 100,
+                        child: AnimatedCircularProgressIndicator(
+                          percentage: 0.6,
+                          label: 'Dart',
+                        ),
+                      ),
+                      SizedBox(height: Responsive.isDesktop(context) ? defaultPadding * 2 : defaultPadding),
+                      const SizedBox(
+                        height: 130,
+                        width: 100,
+                        child: AnimatedCircularProgressIndicator(
+                          percentage: 0.6,
+                          label: 'Android',
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(width: Responsive.isDesktop(context) ? defaultPadding * 2 : defaultPadding),
+                  Column(
+                    children: [
+                      const SizedBox(
+                        height: 130,
+                        width: 100,
+                        child: AnimatedCircularProgressIndicator(
+                          percentage: 0.6,
+                          label: 'Rust',
+                        ),
+                      ),
+                      SizedBox(height: Responsive.isDesktop(context) ? defaultPadding * 2 : defaultPadding),
+                      const SizedBox(
+                        height: 130,
+                        width: 100,
+                        child: AnimatedCircularProgressIndicator(
+                          percentage: 0.6,
+                          label: 'JAVA',
+                        ),
+                      ),
+                      SizedBox(height: Responsive.isDesktop(context) ? defaultPadding * 2 : defaultPadding),
+                      const SizedBox(
+                        height: 130,
+                        width: 100,
+                        child: AnimatedCircularProgressIndicator(
+                          percentage: 0.6,
+                          label: 'C/C++',
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ],
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: defaultPadding),
-            child: Text(
-              'Coding',
-              style: TextStyle(
-                fontSize: 20.0,
-                color: Colors.black87,
-                fontWeight: FontWeight.w700,
-                letterSpacing: 0.8,
-              ),
-            ),
-          ),
-          const AnimatedLinearProgressIndicator(
-            percentage: 0.75,
-            label: 'Dart',
-          ),
-          const AnimatedLinearProgressIndicator(
-            percentage: 0.6,
-            label: 'Python',
-          ),
-          const AnimatedLinearProgressIndicator(
-            percentage: 0.8,
-            label: 'Java',
-          ),
-          const AnimatedLinearProgressIndicator(
-            percentage: 0.65,
-            label: 'HTML',
-          ),
-          const AnimatedLinearProgressIndicator(
-            percentage: 0.5,
-            label: 'CSS',
-          ),
-          const AnimatedLinearProgressIndicator(
-            percentage: 0.4,
-            label: 'Bootstrap',
-          ),
+          // const Padding(
+          //   padding: EdgeInsets.symmetric(vertical: defaultPadding),
+          //   child: Text(
+          //     'Coding',
+          //     style: TextStyle(
+          //       fontSize: 20.0,
+          //       color: Colors.black87,
+          //       fontWeight: FontWeight.w700,
+          //       letterSpacing: 0.8,
+          //     ),
+          //   ),
+          // ),
+          // const AnimatedLinearProgressIndicator(
+          //   percentage: 0.75,
+          //   label: 'Dart',
+          // ),
+          // const AnimatedLinearProgressIndicator(
+          //   percentage: 0.6,
+          //   label: 'Python',
+          // ),
+          // const AnimatedLinearProgressIndicator(
+          //   percentage: 0.8,
+          //   label: 'Java',
+          // ),
+          // const AnimatedLinearProgressIndicator(
+          //   percentage: 0.65,
+          //   label: 'HTML',
+          // ),
+          // const AnimatedLinearProgressIndicator(
+          //   percentage: 0.5,
+          //   label: 'CSS',
+          // ),
+          // const AnimatedLinearProgressIndicator(
+          //   percentage: 0.4,
+          //   label: 'Bootstrap',
+          // ),
         ],
       ),
     );
@@ -165,17 +349,14 @@ class Skills extends StatelessWidget {
 
 class Experience extends StatelessWidget {
   const Experience({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(
-          Responsive.isDesktop(context) ? defaultPadding * 2 : 0,
-          0,
-          Responsive.isDesktop(context) ? defaultPadding * 2 : 0,
-          0),
+      padding: EdgeInsets.fromLTRB(Responsive.isDesktop(context) ? defaultPadding * 2 : 0, 0,
+          Responsive.isDesktop(context) ? defaultPadding * 2 : 0, 0),
       child: Column(
         mainAxisSize: mainMin,
         crossAxisAlignment: crossStart,
@@ -229,14 +410,10 @@ class Experience extends StatelessWidget {
                             children: [
                               Container(
                                 decoration: BoxDecoration(
-                                    border: Border(
-                                        bottom: BorderSide(
-                                            color: Colors.grey[800]!,
-                                            width: 1.0))),
+                                    border: Border(bottom: BorderSide(color: Colors.grey[800]!, width: 1.0))),
                                 child: InkWell(
                                   onTap: () async {
-                                    if (!await launchUrl(
-                                        Uri.parse(experiences[index].link))) {
+                                    if (!await launchUrl(Uri.parse(experiences[index].link))) {
                                       throw 'Could not launch';
                                     }
                                   },
@@ -312,14 +489,10 @@ class Experience extends StatelessWidget {
                               children: [
                                 Container(
                                   decoration: BoxDecoration(
-                                      border: Border(
-                                          bottom: BorderSide(
-                                              color: Colors.grey[800]!,
-                                              width: 1.0))),
+                                      border: Border(bottom: BorderSide(color: Colors.grey[800]!, width: 1.0))),
                                   child: InkWell(
                                     onTap: () async {
-                                      if (!await launchUrl(
-                                          Uri.parse(experiences[index].link))) {
+                                      if (!await launchUrl(Uri.parse(experiences[index].link))) {
                                         throw 'Could not launch';
                                       }
                                     },
@@ -339,15 +512,8 @@ class Experience extends StatelessWidget {
                                 const SizedBox(height: 3.0),
                                 Text(
                                   diffDate(
-                                      startDate: experiences[index]
-                                          .designations
-                                          .last
-                                          .startDate,
-                                      endDate: experiences[index]
-                                              .designations
-                                              .first
-                                              .endDate ??
-                                          DateTime.now()),
+                                      startDate: experiences[index].designations.last.startDate,
+                                      endDate: experiences[index].designations.first.endDate ?? DateTime.now()),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: const TextStyle(
@@ -378,24 +544,15 @@ class Experience extends StatelessWidget {
                                             mainAxisSize: mainMin,
                                             children: [
                                               Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 4.0),
+                                                padding: const EdgeInsets.symmetric(vertical: 4.0),
                                                 child: Container(
                                                     height: 8.0,
                                                     width: 8.0,
                                                     decoration: BoxDecoration(
                                                         color: Colors.grey[600],
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                                    45.0))),
+                                                        borderRadius: BorderRadius.circular(45.0))),
                                               ),
-                                              if (idx !=
-                                                  experiences[index]
-                                                          .designations
-                                                          .length -
-                                                      1)
+                                              if (idx != experiences[index].designations.length - 1)
                                                 Expanded(
                                                   child: Container(
                                                     width: 1.8,
@@ -411,9 +568,7 @@ class Experience extends StatelessWidget {
                                             mainAxisSize: mainMin,
                                             children: [
                                               Text(
-                                                experiences[index]
-                                                    .designations[idx]
-                                                    .title,
+                                                experiences[index].designations[idx].title,
                                                 maxLines: 1,
                                                 overflow: TextOverflow.ellipsis,
                                                 style: const TextStyle(
@@ -424,10 +579,7 @@ class Experience extends StatelessWidget {
                                                 ),
                                               ),
                                               Text(
-                                                (experiences[index]
-                                                            .designations[idx]
-                                                            .endDate !=
-                                                        null
+                                                (experiences[index].designations[idx].endDate != null
                                                     ? '${getFormatedDate(experiences[index].designations[idx].startDate)} - ${getFormatedDate(experiences[index].designations[idx].endDate!)} • ${diffDate(startDate: experiences[index].designations[idx].startDate, endDate: experiences[index].designations[idx].endDate!)}'
                                                     : '${getFormatedDate(experiences[index].designations[idx].startDate)} - Present • ${diffDate(startDate: experiences[index].designations[idx].startDate, endDate: DateTime.now())}'),
                                                 maxLines: 1,

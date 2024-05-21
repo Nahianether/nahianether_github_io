@@ -8,8 +8,8 @@ import 'models/git_repo.dart';
 
 class RecentWorks extends StatelessWidget {
   const RecentWorks({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

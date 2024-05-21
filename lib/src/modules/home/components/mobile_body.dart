@@ -23,13 +23,9 @@ class MobileBody extends StatelessWidget {
           TopMenuBar(key: topMenubarSectionKey),
           Padding(
               padding: EdgeInsets.symmetric(
-                  horizontal: Responsive.isDesktop(context)
-                      ? defaultPadding * 2
-                      : defaultPadding,
+                  horizontal: Responsive.isDesktop(context) ? defaultPadding * 2 : defaultPadding,
                   vertical: defaultPadding * 0.5),
-              child: const Align(
-                  alignment: Alignment.centerRight,
-                  child: FooterAllSocialsLinks())),
+              child: const Align(alignment: Alignment.centerRight, child: FooterAllSocialsLinks())),
           TopIntroSection(key: topIntroSectionKey),
           const KDivider(),
           SkillsAndExperience(key: aboutSectionKey),

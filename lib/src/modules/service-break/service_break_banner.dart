@@ -5,10 +5,10 @@ import '../../constants/constants.dart';
 
 class ServiceBreakBanner extends StatelessWidget {
   const ServiceBreakBanner({
-    Key? key,
+    super.key,
     this.onPressed,
     required this.height,
-  }) : super(key: key);
+  });
 
   final double height;
   final void Function()? onPressed;
@@ -57,7 +57,7 @@ class ServiceBreakBanner extends StatelessWidget {
                   size: 15.0,
                 ),
                 label: const Text(
-                  "Contact with Admin",
+                  'Contact with Admin',
                   style: TextStyle(
                     color: kDefaultColor,
                     letterSpacing: 0.6,

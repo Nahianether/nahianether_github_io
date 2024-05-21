@@ -6,8 +6,8 @@ import '../../constants/size_config/size_config.dart';
 
 class TopIntroSection extends StatelessWidget {
   const TopIntroSection({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

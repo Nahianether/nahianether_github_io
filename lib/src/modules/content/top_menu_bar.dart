@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../constants/constants.dart';
 import '../../constants/size_config/responsive.dart';
 
 class TopMenuBar extends StatelessWidget {
   const TopMenuBar({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -126,10 +125,10 @@ class TopBarButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
         style: ButtonStyle(
-            elevation: MaterialStateProperty.all<double>(1.0),
-            foregroundColor: MaterialStateProperty.all<Color>(const Color(0xFFf7f8fa)),
-            backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFFf7f8fa)),
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
+            elevation: WidgetStateProperty.all<double>(1.0),
+            foregroundColor: WidgetStateProperty.all<Color>(const Color(0xFFf7f8fa)),
+            backgroundColor: WidgetStateProperty.all<Color>(const Color(0xFFf7f8fa)),
+            shape: WidgetStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(18.0), side: const BorderSide(color: kDefaultColor, width: 1.0)))),
         onPressed: onPressed,
         child: Text(label, style: const TextStyle(fontSize: 13.0, color: black)));

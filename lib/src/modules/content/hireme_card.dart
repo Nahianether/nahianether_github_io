@@ -14,7 +14,7 @@ class HireMeCard extends StatelessWidget {
       children: [
         SizedBox(height: defaultPadding * 2),
         SectionTitle(
-          title: "Collaboration",
+          title: 'Collaboration',
           subTitle: "Want to collaborate? Let's talk!",
           color: Color.fromARGB(255, 7, 22, 226),
         ),
@@ -28,8 +28,8 @@ class HireMeCard extends StatelessWidget {
 
 class HireMeBox extends StatelessWidget {
   const HireMeBox({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class HireMeBox extends StatelessWidget {
       child: Row(
         children: [
           Image.asset(
-            "assets/images/email.png",
+            'assets/images/email.png',
             height: 60,
             width: 60,
           ),
@@ -55,12 +55,12 @@ class HireMeBox extends StatelessWidget {
               child: VerticalDivider(),
             ),
           ),
-          Expanded(
+          const Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: [
                 Text(
-                  "Starting New Project?",
+                  'Starting New Project?',
                   style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: defaultPadding / 2),
@@ -72,10 +72,10 @@ class HireMeBox extends StatelessWidget {
             ),
           ),
           DefaultButton(
-            text: "Hire Me!",
-            imageSrc: "assets/images/hand.png",
+            text: 'Hire Me!',
+            imageSrc: 'assets/images/hand.png',
             onPressed: () async {
-              var link = 'mailto:sabikrahat72428@gmail.com';
+              var link = 'mailto:nahianether3@gmail.com';
               if (!await launchUrl(Uri.parse(link))) {
                 throw 'Could not launch';
               }

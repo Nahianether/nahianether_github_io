@@ -1,19 +1,19 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart' as httpsss;
 
 import '../models/git_repo.dart';
 
 class GithubApi {
   Future<ResultData> getAllRepos() async {
     List<GitRepoModel> gitRepoModelList;
-    var request = http.Request(
+    var request = httpsss.Request(
         'GET',
         Uri.parse(
             'https://api.github.com/users/sabikrahat/repos?page=1&per_page=100'));
 
-    http.StreamedResponse response = await request.send();
+    httpsss.StreamedResponse response = await request.send();
     var body = await response.stream.bytesToString();
 
     if (response.statusCode == 200) {

@@ -6,7 +6,7 @@ import '../../../constants/constants.dart';
 import '../../../constants/size_config/size_config.dart';
 
 class ServiceBreakBody extends StatelessWidget {
-  const ServiceBreakBody({Key? key}) : super(key: key);
+  const ServiceBreakBody({super.key});
 
   static const _url = 'https://sabikrahat72428.blogspot.com/';
 
@@ -59,7 +59,7 @@ class ServiceBreakBody extends StatelessWidget {
               label: const Padding(
                 padding: EdgeInsets.symmetric(vertical: 5.0),
                 child: Text(
-                  "Contact with Admin",
+                  'Contact with Admin',
                   style: TextStyle(color: kDefaultColor),
                   textScaleFactor: 0.8,
                 ),
