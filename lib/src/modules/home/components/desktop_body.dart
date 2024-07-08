@@ -20,7 +20,7 @@ class DesktopBody extends StatefulWidget {
 class _BodyState extends State<DesktopBody> {
   bool isMaintainence = isGlobalMaintainence;
   double height = 38.0;
-  ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void dispose() {
