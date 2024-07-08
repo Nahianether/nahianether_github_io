@@ -20,45 +20,60 @@ class DesktopBody extends StatefulWidget {
 class _BodyState extends State<DesktopBody> {
   bool isMaintainence = isGlobalMaintainence;
   double height = 38.0;
+  ScrollController _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          if (isMaintainence)
-            ServiceBreakBanner(
-              height: height,
-              onPressed: () => setState(() {
-                height = 0.0;
-                Future.delayed(const Duration(milliseconds: 350), () {
-                  isMaintainence = false;
-                });
-              }),
-            ),
-          TopMenuBar(key: topMenubarSectionKey),
-          const Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: defaultPadding * 2,
-                  vertical: defaultPadding * 0.5),
-              child: Align(
-                  alignment: Alignment.centerRight,
-                  child: FooterAllSocialsLinks())),
-          TopIntroSection(key: topIntroSectionKey),
-          const KDivider(),
-          SkillsAndExperience(key: aboutSectionKey),
-          const KDivider(),
-          RecentWorks(key: recentWorksSectionKey),
-          const SizedBox(height: defaultPadding * 2),
-          // const KDivider(),
-          // HireMeCard(key: collaborationSectionKey),
-          // const SizedBox(height: defaultPadding * 2),
-          const KDivider(),
-          ContactSection(key: contactSectionKey),
-          const KDivider(),
-          Footer(key: socialLinksSectionKey)
-        ],
-      ),
+    return Stack(
+      children: [
+        SingleChildScrollView(
+          controller: _scrollController,
+          child: Column(
+            children: [
+              if (isMaintainence)
+                ServiceBreakBanner(
+                  height: height,
+                  onPressed: () => setState(() {
+                    height = 0.0;
+                    Future.delayed(const Duration(milliseconds: 350), () {
+                      isMaintainence = false;
+                    });
+                  }),
+                ),
+              const SizedBox(height: 80),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: defaultPadding * 2, vertical: defaultPadding * 0.5),
+                child: Align(alignment: Alignment.centerRight, child: FooterAllSocialsLinks()),
+              ),
+              TopIntroSection(key: topIntroSectionKey),
+              const KDivider(),
+              SkillsAndExperience(key: aboutSectionKey),
+              const KDivider(),
+              RecentWorks(key: recentWorksSectionKey),
+              const SizedBox(height: defaultPadding * 2),
+              // const KDivider(),
+              // HireMeCard(key: collaborationSectionKey),
+              // const SizedBox(height: defaultPadding * 2),
+              const KDivider(),
+              ContactSection(key: contactSectionKey),
+              const KDivider(),
+              Footer(key: socialLinksSectionKey)
+            ],
+          ),
+        ),
+        Positioned(
+          top: 0,
+          left: 0,
+          right: 0,
+          child: TopMenuBar(key: topMenubarSectionKey),
+        ),
+      ],
     );
   }
 }

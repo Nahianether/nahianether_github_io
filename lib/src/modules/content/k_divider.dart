@@ -11,10 +11,8 @@ class KDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: Responsive.isDesktop(context)
-              ? defaultPadding * 2.5
-              : defaultPadding * 1.2),
+      padding:
+          EdgeInsets.symmetric(horizontal: Responsive.isDesktop(context) ? defaultPadding * 2.5 : defaultPadding * 1.2),
       child: Row(
         children: [
           const Expanded(
@@ -27,7 +25,7 @@ class KDivider extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
             child: Image.asset(
-              'assets/icons/splash-icon.png',
+              'assets/icons/ether.jpeg',
               height: 20.0,
             ),
           ),

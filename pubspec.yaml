@@ -1,4 +1,4 @@
-name: pattern_m
+name: portfolio
 description: A new Flutter project.
 
 publish_to: "none"
@@ -11,6 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_launcher_icons: ^0.13.1
   flutter_localizations:
     sdk: flutter
   flutter_riverpod: ^2.4.6
@@ -51,7 +52,6 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/svgs/
-    - assets/works/
 
 import_sorter:
   comments: false

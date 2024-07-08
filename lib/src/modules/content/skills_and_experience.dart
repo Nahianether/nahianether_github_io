@@ -93,7 +93,7 @@ class Skills extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '                    1. State Management',
+                    '                    1. Riverpod',
                     style: TextStyle(
                       fontSize: 16.0,
                       color: Colors.black87,
@@ -102,7 +102,16 @@ class Skills extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '                    2. State Management',
+                    '                    2. Provider',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                  Text(
+                    '                    3. Bloc',
                     style: TextStyle(
                       fontSize: 16.0,
                       color: Colors.black87,
@@ -120,7 +129,7 @@ class Skills extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '                    1. Isar, Hive',
+                    '                    1. Isar',
                     style: TextStyle(
                       fontSize: 16.0,
                       color: Colors.black87,
@@ -129,7 +138,16 @@ class Skills extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '                    2. Firebase',
+                    '                    2. Hive',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                  Text(
+                    '                    3. Firebase',
                     style: TextStyle(
                       fontSize: 16.0,
                       color: Colors.black87,
@@ -174,7 +192,7 @@ class Skills extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '          7. API integration',
+                    '          7. Workmanager',
                     style: TextStyle(
                       fontSize: 16.0,
                       color: Colors.black87,
@@ -183,7 +201,16 @@ class Skills extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '          8. Custom Animation',
+                    '          8. API integration',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                  Text(
+                    '          9. Custom Animation',
                     style: TextStyle(
                       fontSize: 16.0,
                       color: Colors.black87,
@@ -246,7 +273,7 @@ class Skills extends StatelessWidget {
                         height: 130,
                         width: 100,
                         child: AnimatedCircularProgressIndicator(
-                          percentage: 0.6,
+                          percentage: 0.9,
                           label: 'Flutter',
                         ),
                       ),
@@ -255,7 +282,7 @@ class Skills extends StatelessWidget {
                         height: 130,
                         width: 100,
                         child: AnimatedCircularProgressIndicator(
-                          percentage: 0.6,
+                          percentage: 0.8,
                           label: 'Dart',
                         ),
                       ),
@@ -277,7 +304,7 @@ class Skills extends StatelessWidget {
                         height: 130,
                         width: 100,
                         child: AnimatedCircularProgressIndicator(
-                          percentage: 0.6,
+                          percentage: 0.4,
                           label: 'Rust',
                         ),
                       ),
@@ -286,7 +313,7 @@ class Skills extends StatelessWidget {
                         height: 130,
                         width: 100,
                         child: AnimatedCircularProgressIndicator(
-                          percentage: 0.6,
+                          percentage: 0.5,
                           label: 'JAVA',
                         ),
                       ),
@@ -295,7 +322,7 @@ class Skills extends StatelessWidget {
                         height: 130,
                         width: 100,
                         child: AnimatedCircularProgressIndicator(
-                          percentage: 0.6,
+                          percentage: 0.4,
                           label: 'C/C++',
                         ),
                       ),

@@ -35,7 +35,7 @@ class TopMenuBar extends StatelessWidget {
                 ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10),
-                child: Image.asset('assets/icons/splash-icon.png'),
+                child: Image.asset('assets/icons/ether.jpeg'),
               ),
               const SizedBox(width: defaultPadding * 0.7),
               const Text.rich(
