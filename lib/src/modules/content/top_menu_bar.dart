@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../constants/constants.dart';
 import '../../constants/size_config/responsive.dart';
@@ -95,10 +96,10 @@ class TopMenuBar extends StatelessWidget {
                     TopBarButton(
                       label: 'Personal Blogs',
                       onPressed: () async {
-                        // String link = 'https://sabikrahat72428.blogspot.com/';
-                        // if (!await launchUrl(Uri.parse(link))) {
-                        //   throw 'Could not launch';
-                        // }
+                        String link = 'http://blog.int8bit.xyz/';
+                        if (!await launchUrl(Uri.parse(link))) {
+                          throw 'Could not launch';
+                        }
                       },
                     ),
                   ],

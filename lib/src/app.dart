@@ -1,10 +1,8 @@
-import 'package:flutter/material.dart' show BuildContext, MaterialApp, MediaQuery, TextScaler, Widget;
-import 'package:flutter_gen/gen_l10n/app_localizations.dart' show AppLocalizations;
+import 'package:flutter/material.dart' show BuildContext, MaterialApp, MediaQuery, Widget;
 import 'package:flutter_riverpod/flutter_riverpod.dart' show ConsumerWidget, WidgetRef;
 
 import 'constants/constants.dart' show appName;
-import 'extensions/extensions.dart' show BuildContextExtension;
-import 'localization/loalization.dart' show localizationsDelegates, onGenerateTitle, supportedLocales, t;
+import 'localization/loalization.dart' show localizationsDelegates, onGenerateTitle, supportedLocales;
 import 'modules/router/view/router.dart' show AppRouter;
 
 class MyApp extends ConsumerWidget {
@@ -20,9 +18,8 @@ class MyApp extends ConsumerWidget {
       restorationScopeId: appName,
       home: const AppRouter(),
       builder: (context, child) {
-        t = AppLocalizations.of(context)!;
         return MediaQuery(
-          data: context.mq.copyWith(textScaler: const TextScaler.linear(1)),
+          data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
           child: child ?? const AppRouter(),
         );
       },
