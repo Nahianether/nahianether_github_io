@@ -8,7 +8,7 @@ import '../../../constants/size_config/size_config.dart';
 class ServiceBreakBody extends StatelessWidget {
   const ServiceBreakBody({super.key});
 
-  static const _url = 'https://sabikrahat72428.blogspot.com/';
+  static const _url = 'https://blog.int8bit.xyz/';
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +21,8 @@ class ServiceBreakBody extends StatelessWidget {
             'assets/svgs/maintenance.svg',
             semanticsLabel: 'Maintenance Break',
             width: ScreenSize.width * 0.25,
-            placeholderBuilder: (BuildContext context) => Container(
-                padding: const EdgeInsets.all(30.0),
-                child: const CircularProgressIndicator()),
+            placeholderBuilder: (BuildContext context) =>
+                Container(padding: const EdgeInsets.all(30.0), child: const CircularProgressIndicator()),
           ),
           const Padding(
             padding: EdgeInsets.all(8.0),
@@ -33,12 +32,12 @@ class ServiceBreakBody extends StatelessWidget {
                 fontWeight: FontWeight.w900,
                 letterSpacing: 1.1,
               ),
-              textScaleFactor: 1.4,
+              textScaler: TextScaler.linear(1.4),
             ),
           ),
           const Text(
             'We will be back soon!',
-            textScaleFactor: 1.1,
+            textScaler: TextScaler.linear(1.1),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 20.0),
@@ -61,7 +60,7 @@ class ServiceBreakBody extends StatelessWidget {
                 child: Text(
                   'Contact with Admin',
                   style: TextStyle(color: kDefaultColor),
-                  textScaleFactor: 0.8,
+                  textScaler: TextScaler.linear(0.8),
                 ),
               ),
               style: ElevatedButton.styleFrom(

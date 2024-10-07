@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../constants/constants.dart';
 import '../../../constants/size_config/responsive.dart';
@@ -68,16 +67,6 @@ class Sidebar extends StatelessWidget {
                     await Scrollable.ensureVisible(recentWorksSectionKey.currentContext!,
                         duration: const Duration(milliseconds: 1000), curve: Curves.easeInOutCubic);
                   }),
-              // const SizedBox(height: defaultPadding),
-              // TopBarButton(
-              //     label: 'Collaboration',
-              //     onPressed: () async {
-              //       Navigator.pop(context);
-              //       await Scrollable.ensureVisible(
-              //           collaborationSectionKey.currentContext!,
-              //           duration: const Duration(milliseconds: 1000),
-              //           curve: Curves.easeInOutCubic);
-              //     }),
               const SizedBox(height: defaultPadding),
               TopBarButton(
                   label: 'Contact',
@@ -87,16 +76,6 @@ class Sidebar extends StatelessWidget {
                         duration: const Duration(milliseconds: 1000), curve: Curves.easeInOutCubic);
                   }),
               const SizedBox(height: defaultPadding),
-              // TopBarButton(
-              //   label: 'Personal Blogs',
-              //   onPressed: () async {
-              //     Navigator.pop(context);
-              //     String link = 'https://sabikrahat72428.blogspot.com/';
-              //     if (!await launchUrl(Uri.parse(link))) {
-              //       throw 'Could not launch';
-              //     }
-              //   },
-              // ),
               const SizedBox(height: defaultPadding * 2),
               const FooterAllSocialsLinks(isInDrawer: true),
             ],

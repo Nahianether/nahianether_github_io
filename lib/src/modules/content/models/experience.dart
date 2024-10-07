@@ -30,8 +30,21 @@ List<Experience> experiences = [
   Experience(
     designations: [
       Designation(
+        title: 'Software Engineer',
+        startDate: DateTime.parse('2024-10-15 00:00:00.000'),
+      ),
+    ],
+    companyName: 'AKIJ iBOS Limited',
+    link: 'https://ibos.io/',
+    imgPath: 'assets/experiences/akij-ibos.png',
+    location: 'Dhaka, Bangladesh',
+  ),
+  Experience(
+    designations: [
+      Designation(
         title: 'Senior Flutter Developer',
         startDate: DateTime.parse('2023-09-01 00:00:00.000'),
+        endDate: DateTime.parse('2024-10-14 00:00:00.000'),
       ),
       Designation(
         title: 'Flutter Developer',

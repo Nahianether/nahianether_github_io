@@ -1,7 +1,6 @@
 import 'dart:io' show Directory;
 
 import 'package:flutter/material.dart' show WidgetsFlutterBinding;
-
 import 'package:path/path.dart' show join;
 import 'package:path_provider/path_provider.dart' show getApplicationDocumentsDirectory;
 

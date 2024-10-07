@@ -17,7 +17,6 @@ class SectionTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // margin: const EdgeInsets.symmetric(vertical: defaultPadding),
       constraints: const BoxConstraints(maxWidth: 1110),
       height: 80,
       child: Row(
@@ -44,7 +43,7 @@ class SectionTitle extends StatelessWidget {
                   fontWeight: FontWeight.w200,
                   color: kTextColor,
                 ),
-                textScaleFactor: 0.9,
+                textScaler: const TextScaler.linear(0.9),
               ),
               Text(
                 title,

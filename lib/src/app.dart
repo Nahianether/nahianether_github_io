@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart' show BuildContext, MaterialApp, MediaQuery, Widget;
+import 'package:flutter/material.dart' show BuildContext, MaterialApp, MediaQuery, TextScaler, Widget;
 import 'package:flutter_riverpod/flutter_riverpod.dart' show ConsumerWidget, WidgetRef;
 
 import 'constants/constants.dart' show appName;
@@ -19,7 +19,7 @@ class MyApp extends ConsumerWidget {
       home: const AppRouter(),
       builder: (context, child) {
         return MediaQuery(
-          data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+          data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
           child: child ?? const AppRouter(),
         );
       },

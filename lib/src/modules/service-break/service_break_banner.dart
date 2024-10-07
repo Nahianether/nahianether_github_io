@@ -15,7 +15,7 @@ class ServiceBreakBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const url = 'https://sabikrahat72428.blogspot.com/';
+    const url = 'https://blog.int8bit.xyz/';
     return AnimatedContainer(
       duration: const Duration(milliseconds: 500),
       color: Colors.transparent,
@@ -34,14 +34,12 @@ class ServiceBreakBanner extends StatelessWidget {
         child: Row(
           children: [
             const Spacer(),
-            const Text(
-              'Page is under maintenance. I\'ll come back soon.',
-              style: TextStyle(
-                fontWeight: FontWeight.w400,
-                color: black,
-              ),
-              textScaleFactor: 0.85,
-            ),
+            const Text('Page is under maintenance. I\'ll come back soon.',
+                style: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  color: black,
+                ),
+                textScaler: TextScaler.linear(0.85)),
             const SizedBox(width: 20),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 6.0),
@@ -62,7 +60,8 @@ class ServiceBreakBanner extends StatelessWidget {
                     color: kDefaultColor,
                     letterSpacing: 0.6,
                   ),
-                  textScaleFactor: 0.65,
+                  // textScaleFactor: 0.65,
+                  textScaler: TextScaler.linear(0.65),
                 ),
                 style: ElevatedButton.styleFrom(
                   side: const BorderSide(width: 1.3, color: kDefaultColor),

@@ -165,7 +165,7 @@ class Skills extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '          4. FFi with Rust, and C',
+                    '          4. FFi with Rust, and C/C++',
                     style: TextStyle(
                       fontSize: 16.0,
                       color: Colors.black87,
@@ -304,7 +304,7 @@ class Skills extends StatelessWidget {
                         height: 130,
                         width: 100,
                         child: AnimatedCircularProgressIndicator(
-                          percentage: 0.4,
+                          percentage: 0.6,
                           label: 'Rust',
                         ),
                       ),
@@ -332,42 +332,6 @@ class Skills extends StatelessWidget {
               ),
             ],
           ),
-          // const Padding(
-          //   padding: EdgeInsets.symmetric(vertical: defaultPadding),
-          //   child: Text(
-          //     'Coding',
-          //     style: TextStyle(
-          //       fontSize: 20.0,
-          //       color: Colors.black87,
-          //       fontWeight: FontWeight.w700,
-          //       letterSpacing: 0.8,
-          //     ),
-          //   ),
-          // ),
-          // const AnimatedLinearProgressIndicator(
-          //   percentage: 0.75,
-          //   label: 'Dart',
-          // ),
-          // const AnimatedLinearProgressIndicator(
-          //   percentage: 0.6,
-          //   label: 'Python',
-          // ),
-          // const AnimatedLinearProgressIndicator(
-          //   percentage: 0.8,
-          //   label: 'Java',
-          // ),
-          // const AnimatedLinearProgressIndicator(
-          //   percentage: 0.65,
-          //   label: 'HTML',
-          // ),
-          // const AnimatedLinearProgressIndicator(
-          //   percentage: 0.5,
-          //   label: 'CSS',
-          // ),
-          // const AnimatedLinearProgressIndicator(
-          //   percentage: 0.4,
-          //   label: 'Bootstrap',
-          // ),
         ],
       ),
     );
