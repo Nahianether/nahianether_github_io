@@ -6,7 +6,16 @@ import 'package:http/http.dart' as httpsss;
 import '../models/git_repo.dart';
 
 class GithubApi {
+  static ResultData? _cachedData;
+  static DateTime? _lastFetch;
+  static const Duration _cacheExpiration = Duration(minutes: 15);
+  
   Future<ResultData> getAllRepos() async {
+    // Return cached data if available and not expired
+    if (_cachedData != null && _lastFetch != null && 
+        DateTime.now().difference(_lastFetch!) < _cacheExpiration) {
+      return _cachedData!;
+    }
     List<GitRepoModel> gitRepoModelList;
     var request = httpsss.Request(
         'GET',
@@ -18,7 +27,11 @@ class GithubApi {
 
     if (response.statusCode == 200) {
       gitRepoModelList = gitRepoModelFromJson(body);
-      return ResultData(true, gitRepoModelList, '');
+      final result = ResultData(true, gitRepoModelList, '');
+      // Cache the result
+      _cachedData = result;
+      _lastFetch = DateTime.now();
+      return result;
     } else {
       debugPrint(response.reasonPhrase);
       return ResultData(false, [], jsonDecode(body.toString())['message']);

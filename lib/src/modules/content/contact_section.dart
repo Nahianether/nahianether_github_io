@@ -100,17 +100,21 @@ class ContactForm extends StatefulWidget {
 class _ContactFormState extends State<ContactForm> {
   final _formKey = GlobalKey<FormState>();
 
-  TextEditingController nameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController projectTypeController = TextEditingController();
-  TextEditingController projectBudgetController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController projectTypeController = TextEditingController();
+  final TextEditingController projectBudgetController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
 
-  String? name;
-  String? email;
-  String? projectType;
-  String? projectBudget;
-  String? description;
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    projectTypeController.dispose();
+    projectBudgetController.dispose();
+    descriptionController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +128,7 @@ class _ContactFormState extends State<ContactForm> {
             width: 470,
             child: TextFormField(
               controller: nameController,
-              onChanged: (value) => setState(() => name = value),
+              // Remove setState on every character change for better performance
               keyboardType: TextInputType.text,
               textInputAction: TextInputAction.next,
               decoration: const InputDecoration(
@@ -144,7 +148,7 @@ class _ContactFormState extends State<ContactForm> {
             width: 470,
             child: TextFormField(
               controller: emailController,
-              onChanged: (value) => setState(() => email = value),
+              // Remove setState on every character change for better performance
               keyboardType: TextInputType.emailAddress,
               textInputAction: TextInputAction.next,
               decoration: const InputDecoration(
@@ -166,7 +170,7 @@ class _ContactFormState extends State<ContactForm> {
             width: 470,
             child: TextFormField(
               controller: projectTypeController,
-              onChanged: (value) => setState(() => projectType = value),
+              // Remove setState on every character change for better performance
               keyboardType: TextInputType.text,
               textInputAction: TextInputAction.next,
               decoration: const InputDecoration(
@@ -186,7 +190,7 @@ class _ContactFormState extends State<ContactForm> {
             width: 470,
             child: TextFormField(
               controller: projectBudgetController,
-              onChanged: (value) => setState(() => projectBudget = value),
+              // Remove setState on every character change for better performance
               keyboardType: TextInputType.text,
               textInputAction: TextInputAction.next,
               decoration: const InputDecoration(
@@ -205,7 +209,7 @@ class _ContactFormState extends State<ContactForm> {
           SizedBox(
             child: TextFormField(
               controller: descriptionController,
-              onChanged: (value) => setState(() => description = value),
+              // Remove setState on every character change for better performance
               keyboardType: TextInputType.multiline,
               textInputAction: TextInputAction.done,
               decoration: const InputDecoration(
@@ -232,9 +236,9 @@ class _ContactFormState extends State<ContactForm> {
                     // ios specification
                     String subject = 'Website Project Details';
                     String body =
-                        'Name: $name\nProject Type: $projectType\nProject Budget: $projectBudget\nDescription: $description';
+                        'Name: ${nameController.text}\nProject Type: ${projectTypeController.text}\nProject Budget: ${projectBudgetController.text}\nDescription: ${descriptionController.text}';
                     String uri =
-                        'mailto:$email?subject=${Uri.encodeComponent(subject)}&body=${Uri.encodeComponent(body)}';
+                        'mailto:${emailController.text}?subject=${Uri.encodeComponent(subject)}&body=${Uri.encodeComponent(body)}';
 
                     if (!await launchUrl(Uri.parse(uri))) {
                       throw 'Could not launch';

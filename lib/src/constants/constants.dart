@@ -13,7 +13,7 @@ const bodyTextColor = Color(0xFF8B8B8D);
 const bgColor = Color(0xFF1E1E28);
 const Color kTextColor = Color(0xFF707070);
 
-Color kLightPrimaryColor = Colors.cyan.shade900.withOpacity(0.85);
+Color kLightPrimaryColor = Colors.cyan.shade900.withValues(alpha: 0.85);
 
 DateFormat dateFormat = DateFormat('MMM yyyy');
 
@@ -76,13 +76,13 @@ const maxWidth = 1400.0;
 final kDefaultCardShadow = BoxShadow(
   offset: const Offset(0, 20),
   blurRadius: 50,
-  color: Colors.black.withOpacity(0.1),
+  color: Colors.black.withValues(alpha: 0.1),
 );
 
 final kDefaultShadow = BoxShadow(
   offset: const Offset(0, 50),
   blurRadius: 50,
-  color: const Color(0xFF0700B1).withOpacity(0.15),
+  color: const Color(0xFF0700B1).withValues(alpha: 0.15),
 );
 
 //WebView User Agent

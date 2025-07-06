@@ -18,24 +18,26 @@ class AnimatedCircularProgressIndicator extends StatelessWidget {
       children: [
         AspectRatio(
           aspectRatio: 1,
-          child: TweenAnimationBuilder(
-            tween: Tween<double>(begin: 0, end: percentage),
-            duration: defaultDuration,
-            builder: (context, double value, child) => Stack(
-              fit: StackFit.expand,
-              children: [
-                CircularProgressIndicator(
-                  value: value,
-                  color: kDefaultColor,
-                  backgroundColor: Colors.cyan[100],
-                ),
-                Center(
-                  child: Text(
-                    '${(value * 100).toInt()}%',
-                    style: Theme.of(context).textTheme.titleSmall,
+          child: RepaintBoundary(
+            child: TweenAnimationBuilder(
+              tween: Tween<double>(begin: 0, end: percentage),
+              duration: defaultDuration,
+              builder: (context, double value, child) => Stack(
+                fit: StackFit.expand,
+                children: [
+                  CircularProgressIndicator(
+                    value: value,
+                    color: kDefaultColor,
+                    backgroundColor: Colors.cyan[100],
                   ),
-                ),
-              ],
+                  Center(
+                    child: Text(
+                      '${(value * 100).toInt()}%',
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -64,28 +66,30 @@ class AnimatedLinearProgressIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: defaultPadding / 2),
-      child: TweenAnimationBuilder(
-        tween: Tween<double>(begin: 0, end: percentage),
-        duration: defaultDuration,
-        builder: (context, double value, child) => Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  label,
-                  style: const TextStyle(color: black),
-                ),
-                Text('${(value * 100).toInt()}%'),
-              ],
-            ),
-            const SizedBox(height: defaultPadding),
-            LinearProgressIndicator(
-              value: value,
-              color: kDefaultColor,
-              backgroundColor: Colors.cyan[100],
-            ),
-          ],
+      child: RepaintBoundary(
+        child: TweenAnimationBuilder(
+          tween: Tween<double>(begin: 0, end: percentage),
+          duration: defaultDuration,
+          builder: (context, double value, child) => Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    label,
+                    style: const TextStyle(color: black),
+                  ),
+                  Text('${(value * 100).toInt()}%'),
+                ],
+              ),
+              const SizedBox(height: defaultPadding),
+              LinearProgressIndicator(
+                value: value,
+                color: kDefaultColor,
+                backgroundColor: Colors.cyan[100],
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -11,6 +11,12 @@ class RecentWorks extends StatelessWidget {
     super.key,
   });
 
+  List<GitRepoModel> _sortRepositories(List<GitRepoModel> repos) {
+    final sortedRepos = List<GitRepoModel>.from(repos);
+    sortedRepos.sort((a, b) => a.updatedAt!.compareTo(b.updatedAt!));
+    return sortedRepos.reversed.toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -83,16 +89,14 @@ class RecentWorks extends StatelessWidget {
                   if (snapshot.data!.gitRepoModelList.isEmpty) {
                     return const Center(child: Text('No Repo found.'));
                   }
-                  List<GitRepoModel> gitRepoModelList = snapshot.data!.gitRepoModelList;
-                  gitRepoModelList.sort((a, b) => a.updatedAt!.compareTo(b.updatedAt!));
-                  gitRepoModelList = gitRepoModelList.reversed.toList();
+                  final gitRepoModelList = _sortRepositories(snapshot.data!.gitRepoModelList);
                   final length = gitRepoModelList.length;
                   return SingleChildScrollView(
                     child: Wrap(
                       spacing: defaultPadding,
                       runSpacing: defaultPadding * 2,
                       children: List.generate(
-                        length,
+                        length > 20 ? 20 : length, // Limit to 20 repos for performance
                         (index) => SizedBox(
                           width: Responsive.isDesktop(context) ? size.width * 0.25 : size.width - defaultPadding,
                           child: Card(
