@@ -14,7 +14,15 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: const SafeArea(child: Body()),
+      backgroundColor: bgColor,
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          gradient: backgroundGradient,
+        ),
+        child: const SafeArea(child: Body()),
+      ),
       floatingActionButton: FloatingActionButton.small(
         backgroundColor: kDefaultColor,
         onPressed: () async => await Scrollable.ensureVisible(topMenubarSectionKey.currentContext!,

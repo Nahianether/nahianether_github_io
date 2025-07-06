@@ -30,47 +30,64 @@ class _BodyState extends State<DesktopBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        SingleChildScrollView(
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      decoration: const BoxDecoration(
+        gradient: backgroundGradient,
+      ),
+      child: Stack(
+        children: [
+          SingleChildScrollView(
           controller: _scrollController,
-          child: Column(
-            children: [
-              if (isMaintainence)
-                ServiceBreakBanner(
-                  height: height,
-                  onPressed: () => setState(() {
-                    height = 0.0;
-                    Future.delayed(const Duration(milliseconds: 350), () {
-                      isMaintainence = false;
-                    });
-                  }),
-                ),
-              const SizedBox(height: 80),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: defaultPadding * 2, vertical: defaultPadding * 0.5),
-                child: Align(alignment: Alignment.centerRight, child: FooterAllSocialsLinks()),
+          child: Center(
+            child: Container(
+              constraints: const BoxConstraints(maxWidth: maxWidth),
+              child: Column(
+                children: [
+                  if (isMaintainence)
+                    ServiceBreakBanner(
+                      height: height,
+                      onPressed: () => setState(() {
+                        height = 0.0;
+                        Future.delayed(const Duration(milliseconds: 350), () {
+                          isMaintainence = false;
+                        });
+                      }),
+                    ),
+                  const SizedBox(height: 80),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: defaultPadding * 2, vertical: defaultPadding * 0.5),
+                    child: Align(alignment: Alignment.centerRight, child: FooterAllSocialsLinks()),
+                  ),
+                  TopIntroSection(key: topIntroSectionKey),
+                  const KDivider(),
+                  SkillsAndExperience(key: aboutSectionKey),
+                  const KDivider(),
+                  RecentWorks(key: recentWorksSectionKey),
+                  const SizedBox(height: defaultPadding * 2),
+                  const KDivider(),
+                  ContactSection(key: contactSectionKey),
+                  const KDivider(),
+                  Footer(key: socialLinksSectionKey)
+                ],
               ),
-              TopIntroSection(key: topIntroSectionKey),
-              const KDivider(),
-              SkillsAndExperience(key: aboutSectionKey),
-              const KDivider(),
-              RecentWorks(key: recentWorksSectionKey),
-              const SizedBox(height: defaultPadding * 2),
-              const KDivider(),
-              ContactSection(key: contactSectionKey),
-              const KDivider(),
-              Footer(key: socialLinksSectionKey)
-            ],
+            ),
           ),
         ),
         Positioned(
           top: 0,
           left: 0,
           right: 0,
-          child: TopMenuBar(key: topMenubarSectionKey),
+          child: Center(
+            child: Container(
+              constraints: const BoxConstraints(maxWidth: maxWidth),
+              child: TopMenuBar(key: topMenubarSectionKey),
+            ),
+          ),
         ),
       ],
+    ),
     );
   }
 }

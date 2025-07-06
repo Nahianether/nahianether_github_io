@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-import '../../components/animated_progress_indicator.dart';
 import '../../constants/constants.dart';
 import '../../constants/size_config/responsive.dart';
-import '../../constants/size_config/size_config.dart';
 import 'models/experience.dart';
 
 class SkillsAndExperience extends StatelessWidget {
@@ -14,31 +11,73 @@ class SkillsAndExperience extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(
-          Responsive.isDesktop(context) ? defaultPadding * 2 : defaultPadding,
-          0,
-          Responsive.isDesktop(context) ? defaultPadding * 2 : defaultPadding,
-          Responsive.isDesktop(context) ? defaultPadding * 2 : defaultPadding),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Expanded(
-                flex: 3,
-                child: Skills(),
+    return Container(
+      width: double.infinity,
+      decoration: const BoxDecoration(
+        gradient: backgroundGradient,
+      ),
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: Responsive.isDesktop(context) ? spacing64 : spacing24,
+          vertical: spacing48,
+        ),
+        child: Column(
+          children: [
+            // Section Header
+            Container(
+              margin: const EdgeInsets.only(bottom: spacing48),
+              child: Column(
+                children: [
+                  ShaderMask(
+                    shaderCallback: (bounds) => neonGradient.createShader(bounds),
+                    child: const Text(
+                      'Skills & Experience',
+                      style: TextStyle(
+                        fontSize: text4XL,
+                        fontWeight: FontWeight.w900,
+                        color: white,
+                        letterSpacing: -1.0,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: spacing16),
+                  const Text(
+                    'My technical expertise and professional journey',
+                    style: TextStyle(
+                      fontSize: textLG,
+                      color: textSecondary,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
               ),
-              if (Responsive.isDesktop(context))
-                const Expanded(
-                  flex: 2,
-                  child: Experience(),
-                ),
-            ],
-          ),
-          if (!Responsive.isDesktop(context)) const Experience(),
-        ],
+            ),
+            // Content Layout
+            if (Responsive.isDesktop(context))
+              const Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    flex: 6,
+                    child: Skills(),
+                  ),
+                  SizedBox(width: spacing48),
+                  Expanded(
+                    flex: 4,
+                    child: Experience(),
+                  ),
+                ],
+              )
+            else
+              const Column(
+                children: [
+                  Skills(),
+                  SizedBox(height: spacing48),
+                  Experience(),
+                ],
+              ),
+          ],
+        ),
       ),
     );
   }
@@ -49,291 +88,189 @@ class Skills extends StatelessWidget {
     super.key,
   });
 
+  // Modern skill categories with proficiency levels
+  final List<Map<String, dynamic>> skillCategories = const [
+    {
+      'title': 'Mobile Development',
+      'icon': '📱',
+      'skills': [
+        {'name': 'Flutter', 'level': 0.95},
+        {'name': 'Dart', 'level': 0.95},
+        {'name': 'Android', 'level': 0.85},
+        {'name': 'iOS', 'level': 0.75},
+      ],
+    },
+    {
+      'title': 'State Management',
+      'icon': '⚙️',
+      'skills': [
+        {'name': 'Riverpod', 'level': 0.90},
+        {'name': 'Provider', 'level': 0.85},
+        {'name': 'Bloc', 'level': 0.80},
+        {'name': 'GetX', 'level': 0.70},
+      ],
+    },
+    {
+      'title': 'Backend & Database',
+      'icon': '💾',
+      'skills': [
+        {'name': 'Firebase', 'level': 0.90},
+        {'name': 'Isar', 'level': 0.85},
+        {'name': 'Hive', 'level': 0.80},
+        {'name': 'REST APIs', 'level': 0.95},
+      ],
+    },
+    {
+      'title': 'Programming Languages',
+      'icon': '💻',
+      'skills': [
+        {'name': 'Dart', 'level': 0.95},
+        {'name': 'Java', 'level': 0.75},
+        {'name': 'Rust', 'level': 0.60},
+        {'name': 'C/C++', 'level': 0.70},
+      ],
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(right: Responsive.isDesktop(context) ? defaultPadding * 2 : 0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: defaultPadding),
-            child: Text(
-              'Skills & Coding',
-              style: TextStyle(
-                fontSize: 20.0,
-                color: Colors.black87,
-                fontWeight: FontWeight.w700,
-                letterSpacing: 0.8,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Skills Title
+        Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(spacing12),
+              decoration: BoxDecoration(
+                gradient: primaryGradient,
+                borderRadius: BorderRadius.circular(radiusSM),
+                boxShadow: neonGlow,
+              ),
+              child: const Text(
+                '⚡',
+                style: TextStyle(
+                  fontSize: textXL,
+                ),
               ),
             ),
+            const SizedBox(width: spacing16),
+            const Text(
+              'Technical Skills',
+              style: TextStyle(
+                fontSize: text2XL,
+                color: textPrimary,
+                fontWeight: FontWeight.w700,
+                letterSpacing: 0.5,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: spacing32),
+        // Compact Skills Grid
+        GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: Responsive.isDesktop(context) ? 2 : 1,
+            childAspectRatio: 2.2,
+            crossAxisSpacing: spacing20,
+            mainAxisSpacing: spacing20,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Column(
+          itemCount: skillCategories.length,
+          itemBuilder: (context, index) {
+            final category = skillCategories[index];
+            return Container(
+              padding: const EdgeInsets.all(spacing20),
+              decoration: BoxDecoration(
+                gradient: cardGradient,
+                borderRadius: BorderRadius.circular(radiusLG),
+                boxShadow: shadowMD,
+                border: Border.all(
+                  color: primaryColor.withValues(alpha: 0.1),
+                  width: 1,
+                ),
+              ),
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    '1. Flutter',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 0.5,
-                    ),
-                  ),
-                  Text(
-                    '          1. State Management',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 0.5,
-                    ),
-                  ),
-                  Text(
-                    '                    1. Riverpod',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 0.5,
-                    ),
-                  ),
-                  Text(
-                    '                    2. Provider',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 0.5,
-                    ),
-                  ),
-                  Text(
-                    '                    3. Bloc',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 0.5,
-                    ),
-                  ),
-                  Text(
-                    '          2. DB',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 0.5,
-                    ),
-                  ),
-                  Text(
-                    '                    1. Isar',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 0.5,
-                    ),
-                  ),
-                  Text(
-                    '                    2. Hive',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 0.5,
-                    ),
-                  ),
-                  Text(
-                    '                    3. Firebase',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 0.5,
-                    ),
-                  ),
-                  Text(
-                    '          3. Multi-Threading',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 0.5,
-                    ),
-                  ),
-                  Text(
-                    '          4. FFi with Rust, and C/C++',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 0.5,
-                    ),
-                  ),
-                  Text(
-                    '          5. Method Chanel',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 0.5,
-                    ),
-                  ),
-                  Text(
-                    '          6. Custom Painting',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 0.5,
-                    ),
-                  ),
-                  Text(
-                    '          7. Workmanager',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 0.5,
-                    ),
-                  ),
-                  Text(
-                    '          8. API integration',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 0.5,
-                    ),
-                  ),
-                  Text(
-                    '          9. Custom Animation',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 0.5,
-                    ),
-                  ),
-                  Text(
-                    '2. Dart',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 0.5,
-                    ),
-                  ),
-                  Text(
-                    '3. Android',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 0.5,
-                    ),
-                  ),
-                  Text(
-                    '4. Rust',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 0.5,
-                    ),
-                  ),
-                  Text(
-                    '5. JAVA',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 0.5,
-                    ),
-                  ),
-                  Text(
-                    '6. C/C++',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 0.5,
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  Column(
+                  // Compact Category Header
+                  Row(
                     children: [
-                      const SizedBox(
-                        height: 130,
-                        width: 100,
-                        child: AnimatedCircularProgressIndicator(
-                          percentage: 0.9,
-                          label: 'Flutter',
-                        ),
+                      Text(
+                        category['icon'],
+                        style: const TextStyle(fontSize: textXL),
                       ),
-                      SizedBox(height: Responsive.isDesktop(context) ? defaultPadding * 2 : defaultPadding),
-                      const SizedBox(
-                        height: 130,
-                        width: 100,
-                        child: AnimatedCircularProgressIndicator(
-                          percentage: 0.8,
-                          label: 'Dart',
-                        ),
-                      ),
-                      SizedBox(height: Responsive.isDesktop(context) ? defaultPadding * 2 : defaultPadding),
-                      const SizedBox(
-                        height: 130,
-                        width: 100,
-                        child: AnimatedCircularProgressIndicator(
-                          percentage: 0.6,
-                          label: 'Android',
+                      const SizedBox(width: spacing8),
+                      Expanded(
+                        child: Text(
+                          category['title'],
+                          style: const TextStyle(
+                            fontSize: textBase,
+                            fontWeight: FontWeight.w700,
+                            color: textPrimary,
+                            letterSpacing: 0.3,
+                          ),
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(width: Responsive.isDesktop(context) ? defaultPadding * 2 : defaultPadding),
-                  Column(
-                    children: [
-                      const SizedBox(
-                        height: 130,
-                        width: 100,
-                        child: AnimatedCircularProgressIndicator(
-                          percentage: 0.6,
-                          label: 'Rust',
-                        ),
+                  const SizedBox(height: spacing16),
+                  // Compact Skills List
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: (category['skills'] as List).map<Widget>((skill) {
+                          return Container(
+                            margin: const EdgeInsets.only(bottom: spacing6),
+                            child: Row(
+                              children: [
+                                Container(
+                                  width: 4,
+                                  height: 4,
+                                  decoration: BoxDecoration(
+                                    color: primaryColor,
+                                    shape: BoxShape.circle,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: primaryColor.withValues(alpha: 0.3),
+                                        blurRadius: 2,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(width: spacing6),
+                                Expanded(
+                                  child: Text(
+                                    skill['name'],
+                                    style: const TextStyle(
+                                      fontSize: textXS,
+                                      fontWeight: FontWeight.w500,
+                                      color: textSecondary,
+                                    ),
+                                  ),
+                                ),
+                                Text(
+                                  '${(skill['level'] * 100).toInt()}%',
+                                  style: const TextStyle(
+                                    fontSize: textXS,
+                                    fontWeight: FontWeight.w600,
+                                    color: secondaryColor,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        }).toList(),
                       ),
-                      SizedBox(height: Responsive.isDesktop(context) ? defaultPadding * 2 : defaultPadding),
-                      const SizedBox(
-                        height: 130,
-                        width: 100,
-                        child: AnimatedCircularProgressIndicator(
-                          percentage: 0.5,
-                          label: 'JAVA',
-                        ),
-                      ),
-                      SizedBox(height: Responsive.isDesktop(context) ? defaultPadding * 2 : defaultPadding),
-                      const SizedBox(
-                        height: 130,
-                        width: 100,
-                        child: AnimatedCircularProgressIndicator(
-                          percentage: 0.4,
-                          label: 'C/C++',
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ],
               ),
-            ],
-          ),
-        ],
-      ),
+            );
+          },
+        ),
+      ],
     );
   }
 }
@@ -345,260 +282,152 @@ class Experience extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(Responsive.isDesktop(context) ? defaultPadding * 2 : 0, 0,
-          Responsive.isDesktop(context) ? defaultPadding * 2 : 0, 0),
-      child: Column(
-        mainAxisSize: mainMin,
-        crossAxisAlignment: crossStart,
-        children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: defaultPadding),
-            child: Text(
-              'Experience',
-              style: TextStyle(
-                fontSize: 20.0,
-                color: Colors.black87,
-                fontWeight: FontWeight.w700,
-                letterSpacing: 0.8,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Experience Title
+        Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(spacing12),
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [secondaryColor, primaryColor],
+                ),
+                borderRadius: BorderRadius.circular(radiusSM),
+                boxShadow: greenGlow,
+              ),
+              child: const Text(
+                '🏆',
+                style: TextStyle(
+                  fontSize: textXL,
+                ),
               ),
             ),
-          ),
-          const Text(
-            'Playing with software development for the last 4 and half years (almost) & trying to update me daily with the new technologies.',
-            style: TextStyle(
-              fontSize: 11.5,
-              color: bodyTextColor,
-              fontWeight: FontWeight.w600,
-              letterSpacing: 0.8,
+            const SizedBox(width: spacing16),
+            const Text(
+              'Experience',
+              style: TextStyle(
+                fontSize: text2XL,
+                color: textPrimary,
+                fontWeight: FontWeight.w700,
+                letterSpacing: 0.5,
+              ),
             ),
-            textAlign: TextAlign.justify,
-          ),
-          const SizedBox(height: defaultPadding * 0.7),
-          Column(
-            mainAxisSize: mainMin,
-            crossAxisAlignment: crossStart,
-            children: List.generate(
-              experiences.length,
-              (index) => experiences[index].designations.length == 1
-                  ? Row(
-                      crossAxisAlignment: crossStart,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 5.0),
+          ],
+        ),
+        const SizedBox(height: spacing32),
+        // Compact Experience Timeline
+        Column(
+          children: experiences.take(4).map((experience) {
+            return Container(
+              margin: const EdgeInsets.only(bottom: spacing16),
+              padding: const EdgeInsets.all(spacing16),
+              decoration: BoxDecoration(
+                gradient: cardGradient,
+                borderRadius: BorderRadius.circular(radiusLG),
+                boxShadow: shadowSM,
+                border: Border.all(
+                  color: secondaryColor.withValues(alpha: 0.1),
+                  width: 1,
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Company Header
+                  Row(
+                    children: [
+                      Container(
+                        width: 32,
+                        height: 32,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(radiusXS),
+                          border: Border.all(
+                            color: primaryColor.withValues(alpha: 0.2),
+                            width: 1,
+                          ),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(radiusXS),
                           child: Image.asset(
-                            experiences[index].imgPath,
-                            height: 40.0,
-                            width: 40.0,
+                            experience.imgPath,
+                            fit: BoxFit.cover,
                           ),
                         ),
-                        const SizedBox(width: 10.0),
-                        SizedBox(
-                          height: 100.0,
-                          child: Column(
-                            mainAxisSize: mainMin,
-                            crossAxisAlignment: crossStart,
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                    border: Border(bottom: BorderSide(color: Colors.grey[800]!, width: 1.0))),
-                                child: InkWell(
-                                  onTap: () async {
-                                    if (!await launchUrl(Uri.parse(experiences[index].link))) {
-                                      throw 'Could not launch';
-                                    }
-                                  },
-                                  child: Text(
-                                    experiences[index].companyName,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                      fontSize: 13.0,
-                                      color: black,
-                                      fontWeight: FontWeight.bold,
-                                      letterSpacing: 0.8,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 3.0),
-                              Text(
-                                experiences[index].designations.first.title,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  fontSize: 12.0,
-                                  color: black,
-                                  fontWeight: FontWeight.w400,
-                                  letterSpacing: 0.8,
-                                ),
-                              ),
-                              Text(
-                                "${getFormatedDate(experiences[index].designations.first.startDate)} - ${experiences[index].designations.first.endDate == null ? 'Present' : getFormatedDate(experiences[index].designations.first.endDate!)} • ${diffDate(startDate: experiences[index].designations.first.startDate, endDate: experiences[index].designations.first.endDate ?? DateTime.now())}",
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  fontSize: 11.5,
-                                  color: bodyTextColor,
-                                  letterSpacing: 0.8,
-                                ),
-                              ),
-                              Text(
-                                experiences[index].location,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  fontSize: 11.5,
-                                  color: bodyTextColor,
-                                  letterSpacing: 0.8,
-                                ),
-                              ),
-                              const SizedBox(height: 20.0),
-                            ],
-                          ),
-                        ),
-                      ],
-                    )
-                  : Column(
-                      mainAxisSize: mainMin,
-                      children: [
-                        Row(
-                          crossAxisAlignment: crossStart,
+                      ),
+                      const SizedBox(width: spacing12),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(top: 5.0),
-                              child: Image.asset(
-                                experiences[index].imgPath,
-                                height: 40.0,
-                                width: 40.0,
+                            Text(
+                              experience.companyName,
+                              style: const TextStyle(
+                                fontSize: textBase,
+                                color: textPrimary,
+                                fontWeight: FontWeight.w700,
                               ),
                             ),
-                            const SizedBox(width: 10.0),
-                            Column(
-                              mainAxisSize: mainMin,
-                              crossAxisAlignment: crossStart,
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                      border: Border(bottom: BorderSide(color: Colors.grey[800]!, width: 1.0))),
-                                  child: InkWell(
-                                    onTap: () async {
-                                      if (!await launchUrl(Uri.parse(experiences[index].link))) {
-                                        throw 'Could not launch';
-                                      }
-                                    },
-                                    child: Text(
-                                      experiences[index].companyName,
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: const TextStyle(
-                                        fontSize: 13.0,
-                                        color: black,
-                                        fontWeight: FontWeight.bold,
-                                        letterSpacing: 0.8,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(height: 3.0),
-                                Text(
-                                  diffDate(
-                                      startDate: experiences[index].designations.last.startDate,
-                                      endDate: experiences[index].designations.first.endDate ?? DateTime.now()),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(
-                                    fontSize: 11.5,
-                                    color: bodyTextColor,
-                                    letterSpacing: 0.8,
-                                  ),
-                                ),
-                                Text(
-                                  experiences[index].location,
-                                  style: const TextStyle(
-                                    fontSize: 11.5,
-                                    color: bodyTextColor,
-                                    letterSpacing: 0.8,
-                                  ),
-                                ),
-                                const SizedBox(height: 10.0),
-                                Column(
-                                  crossAxisAlignment: crossStart,
-                                  children: List.generate(
-                                    experiences[index].designations.length,
-                                    (idx) => SizedBox(
-                                      height: 60.0,
-                                      child: Row(
-                                        crossAxisAlignment: crossStart,
-                                        children: [
-                                          Column(
-                                            mainAxisSize: mainMin,
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.symmetric(vertical: 4.0),
-                                                child: Container(
-                                                    height: 8.0,
-                                                    width: 8.0,
-                                                    decoration: BoxDecoration(
-                                                        color: Colors.grey[600],
-                                                        borderRadius: BorderRadius.circular(45.0))),
-                                              ),
-                                              if (idx != experiences[index].designations.length - 1)
-                                                Expanded(
-                                                  child: Container(
-                                                    width: 1.8,
-                                                    height: 20.0,
-                                                    color: Colors.grey[400],
-                                                  ),
-                                                ),
-                                            ],
-                                          ),
-                                          const SizedBox(width: 15.0),
-                                          Column(
-                                            crossAxisAlignment: crossStart,
-                                            mainAxisSize: mainMin,
-                                            children: [
-                                              Text(
-                                                experiences[index].designations[idx].title,
-                                                maxLines: 1,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: const TextStyle(
-                                                  fontSize: 12.0,
-                                                  color: black,
-                                                  fontWeight: FontWeight.bold,
-                                                  letterSpacing: 0.8,
-                                                ),
-                                              ),
-                                              Text(
-                                                (experiences[index].designations[idx].endDate != null
-                                                    ? '${getFormatedDate(experiences[index].designations[idx].startDate)} - ${getFormatedDate(experiences[index].designations[idx].endDate!)} • ${diffDate(startDate: experiences[index].designations[idx].startDate, endDate: experiences[index].designations[idx].endDate!)}'
-                                                    : '${getFormatedDate(experiences[index].designations[idx].startDate)} - Present • ${diffDate(startDate: experiences[index].designations[idx].startDate, endDate: DateTime.now())}'),
-                                                maxLines: 1,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: const TextStyle(
-                                                  fontSize: 11.5,
-                                                  color: bodyTextColor,
-                                                  letterSpacing: 0.8,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(height: 10.0),
-                              ],
+                            Text(
+                              experience.location,
+                              style: const TextStyle(
+                                fontSize: textXS,
+                                color: textMuted,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ],
                         ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: spacing12),
+                  // Latest Position
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: spacing12,
+                      vertical: spacing6,
+                    ),
+                    decoration: BoxDecoration(
+                      color: primaryColor.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(radiusXS),
+                      border: Border.all(
+                        color: primaryColor.withValues(alpha: 0.2),
+                        width: 1,
+                      ),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          experience.designations.first.title,
+                          style: const TextStyle(
+                            fontSize: textSM,
+                            color: textSecondary,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        const SizedBox(height: spacing2),
+                        Text(
+                          experience.designations.first.endDate == null
+                              ? '${getFormatedDate(experience.designations.first.startDate)} - Present'
+                              : '${getFormatedDate(experience.designations.first.startDate)} - ${getFormatedDate(experience.designations.first.endDate!)}',
+                          style: const TextStyle(
+                            fontSize: textXS,
+                            color: secondaryColor,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
                       ],
                     ),
-            ),
-          ),
-        ],
-      ),
+                  ),
+                ],
+              ),
+            );
+          }).toList(),
+        ),
+      ],
     );
   }
 }

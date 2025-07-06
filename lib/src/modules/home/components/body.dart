@@ -11,17 +11,15 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return SizedBox(
+    return Container(
       height: size.height,
       width: size.width,
+      decoration: const BoxDecoration(
+        gradient: backgroundGradient,
+      ),
       child: Responsive(
         mobile: const MobileBody(),
-        desktop: Center(
-          child: Container(
-            constraints: const BoxConstraints(maxWidth: maxWidth),
-            child: const DesktopBody(),
-          ),
-        ),
+        desktop: const DesktopBody(),
       ),
     );
   }

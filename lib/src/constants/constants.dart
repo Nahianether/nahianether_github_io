@@ -3,15 +3,38 @@ import 'package:intl/intl.dart';
 
 const appName = 'flutter_app';
 
-const Color white = Colors.white;
-const Color black = Colors.black;
-const Color kDefaultColor = Color(0xFF50afc0);
-const primaryColor = Color(0xFFFFC107);
-const secondaryColor = Color(0xFF242430);
-const darkColor = Color(0xFF191923);
-const bodyTextColor = Color(0xFF8B8B8D);
-const bgColor = Color(0xFF1E1E28);
-const Color kTextColor = Color(0xFF707070);
+// Ultra Modern Color Palette - 2024 Portfolio Design
+const Color white = Color(0xFFFFFFFF);
+const Color black = Color(0xFF000000);
+
+// Dark Theme Base Colors
+const Color bgColor = Color(0xFF0A0A0B); // Deep black background
+const Color surfaceColor = Color(0xFF111113); // Slightly lighter surface
+const Color cardColor = Color(0xFF1A1A1C); // Card background
+const Color borderColor = Color(0xFF27272A); // Subtle borders
+
+// Vibrant Accent Colors
+const Color primaryColor = Color(0xFF00D4FF); // Electric cyan
+const Color primaryLight = Color(0xFF3DDBFF); // Light cyan
+const Color primaryDark = Color(0xFF0099CC); // Dark cyan
+
+// Secondary Accents
+const Color secondaryColor = Color(0xFF00FF87); // Electric green
+const Color accentColor = Color(0xFFFF6B6B); // Coral red
+const Color warningColor = Color(0xFFFFBE0B); // Electric yellow
+const Color purpleAccent = Color(0xFF8B5CF6); // Purple accent
+
+// Text Colors (High Contrast)
+const Color textPrimary = Color(0xFFFFFFFF); // Pure white
+const Color textSecondary = Color(0xFFE4E4E7); // Light gray
+const Color textMuted = Color(0xFF71717A); // Medium gray
+const Color textDark = Color(0xFF3F3F46); // Dark gray
+
+// Legacy support
+const Color kDefaultColor = primaryColor;
+const Color bodyTextColor = textSecondary;
+const Color darkColor = surfaceColor;
+const Color kTextColor = textMuted;
 
 Color kLightPrimaryColor = Colors.cyan.shade900.withValues(alpha: 0.85);
 
@@ -69,21 +92,197 @@ final officeProjects = [
   'Smart Car Parking System',
 ];
 
-const defaultPadding = 20.0;
-const defaultDuration = Duration(seconds: 1);
+// Modern Spacing System
+const double spacing2 = 2.0;
+const double spacing4 = 4.0;
+const double spacing6 = 6.0;
+const double spacing8 = 8.0;
+const double spacing12 = 12.0;
+const double spacing16 = 16.0;
+const double spacing20 = 20.0;
+const double spacing24 = 24.0;
+const double spacing32 = 32.0;
+const double spacing40 = 40.0;
+const double spacing48 = 48.0;
+const double spacing64 = 64.0;
+const double spacing80 = 80.0;
+
+// Legacy support
+const defaultPadding = spacing20;
+const defaultDuration = Duration(milliseconds: 300);
 const maxWidth = 1400.0;
 
-final kDefaultCardShadow = BoxShadow(
-  offset: const Offset(0, 20),
-  blurRadius: 50,
-  color: Colors.black.withValues(alpha: 0.1),
+// Modern Border Radius
+const double radiusXS = 4.0;
+const double radiusSM = 8.0;
+const double radiusMD = 12.0;
+const double radiusLG = 16.0;
+const double radiusXL = 24.0;
+const double radiusXXL = 32.0;
+
+// Ultra Modern Shadow System with Neon Effects
+final List<BoxShadow> shadowSM = [
+  BoxShadow(
+    offset: const Offset(0, 2),
+    blurRadius: 8,
+    color: Colors.black.withValues(alpha: 0.4),
+  ),
+  BoxShadow(
+    offset: const Offset(0, 1),
+    blurRadius: 3,
+    color: Colors.black.withValues(alpha: 0.2),
+  ),
+];
+
+final List<BoxShadow> shadowMD = [
+  BoxShadow(
+    offset: const Offset(0, 8),
+    blurRadius: 25,
+    color: Colors.black.withValues(alpha: 0.6),
+  ),
+  BoxShadow(
+    offset: const Offset(0, 3),
+    blurRadius: 10,
+    color: Colors.black.withValues(alpha: 0.3),
+  ),
+];
+
+final List<BoxShadow> shadowLG = [
+  BoxShadow(
+    offset: const Offset(0, 20),
+    blurRadius: 40,
+    color: Colors.black.withValues(alpha: 0.7),
+  ),
+  BoxShadow(
+    offset: const Offset(0, 8),
+    blurRadius: 15,
+    color: Colors.black.withValues(alpha: 0.4),
+  ),
+];
+
+final List<BoxShadow> shadowXL = [
+  BoxShadow(
+    offset: const Offset(0, 30),
+    blurRadius: 60,
+    color: Colors.black.withValues(alpha: 0.8),
+  ),
+  BoxShadow(
+    offset: const Offset(0, 12),
+    blurRadius: 25,
+    color: Colors.black.withValues(alpha: 0.5),
+  ),
+];
+
+// Neon Glow Effects
+final List<BoxShadow> neonGlow = [
+  BoxShadow(
+    offset: const Offset(0, 0),
+    blurRadius: 20,
+    color: primaryColor.withValues(alpha: 0.5),
+  ),
+  BoxShadow(
+    offset: const Offset(0, 0),
+    blurRadius: 40,
+    color: primaryColor.withValues(alpha: 0.2),
+  ),
+];
+
+final List<BoxShadow> greenGlow = [
+  BoxShadow(
+    offset: const Offset(0, 0),
+    blurRadius: 20,
+    color: secondaryColor.withValues(alpha: 0.5),
+  ),
+  BoxShadow(
+    offset: const Offset(0, 0),
+    blurRadius: 40,
+    color: secondaryColor.withValues(alpha: 0.2),
+  ),
+];
+
+// Enhanced Glass Effect
+final List<BoxShadow> glassEffectShadow = [
+  BoxShadow(
+    offset: const Offset(0, 8),
+    blurRadius: 32,
+    color: Colors.black.withValues(alpha: 0.6),
+  ),
+  BoxShadow(
+    offset: const Offset(0, 0),
+    blurRadius: 1,
+    color: primaryColor.withValues(alpha: 0.1),
+  ),
+];
+
+// Modern Typography Scale
+const double textXS = 12.0;
+const double textSM = 14.0;
+const double textBase = 16.0;
+const double textLG = 18.0;
+const double textXL = 20.0;
+const double text2XL = 24.0;
+const double text3XL = 30.0;
+const double text4XL = 36.0;
+const double text5XL = 48.0;
+const double text6XL = 64.0;
+const double text7XL = 72.0;
+const double text8XL = 96.0;
+const double text9XL = 128.0;
+
+// Ultra Modern Gradients
+const LinearGradient primaryGradient = LinearGradient(
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+  colors: [primaryColor, secondaryColor],
+  stops: [0.0, 1.0],
 );
 
-final kDefaultShadow = BoxShadow(
-  offset: const Offset(0, 50),
-  blurRadius: 50,
-  color: const Color(0xFF0700B1).withValues(alpha: 0.15),
+const LinearGradient heroGradient = LinearGradient(
+  begin: Alignment.topCenter,
+  end: Alignment.bottomCenter,
+  colors: [bgColor, surfaceColor, bgColor],
+  stops: [0.0, 0.5, 1.0],
 );
+
+const LinearGradient cardGradient = LinearGradient(
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+  colors: [cardColor, Color(0xFF1F1F23)],
+);
+
+// Neon Glow Effect
+const LinearGradient neonGradient = LinearGradient(
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+  colors: [primaryColor, purpleAccent, secondaryColor],
+  stops: [0.0, 0.5, 1.0],
+);
+
+// Electric Glass Effect
+const LinearGradient glassGradient = LinearGradient(
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+  colors: [
+    Color(0x1A00D4FF),
+    Color(0x0D00FF87),
+  ],
+);
+
+// Background Pattern Gradient
+const LinearGradient backgroundGradient = LinearGradient(
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+  colors: [
+    Color(0xFF0A0A0B),
+    Color(0xFF111113),
+    Color(0xFF0A0A0B),
+  ],
+  stops: [0.0, 0.5, 1.0],
+);
+
+// Legacy support
+final kDefaultCardShadow = shadowMD.first;
+final kDefaultShadow = shadowLG.first;
 
 //WebView User Agent
 const String webViewUserAgent =

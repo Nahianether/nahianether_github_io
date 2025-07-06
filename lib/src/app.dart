@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart' show BuildContext, MaterialApp, MediaQuery, TextScaler, Widget;
+import 'package:flutter/material.dart' show BuildContext, MaterialApp, MediaQuery, TextScaler, Widget, ThemeData, ColorScheme, Brightness;
 import 'package:flutter_riverpod/flutter_riverpod.dart' show ConsumerWidget, WidgetRef;
 
-import 'constants/constants.dart' show appName;
-import 'localization/loalization.dart' show localizationsDelegates, onGenerateTitle, supportedLocales;
+import 'constants/constants.dart' show appName, bgColor;
 import 'modules/router/view/router.dart' show AppRouter;
 
 class MyApp extends ConsumerWidget {
@@ -11,11 +10,16 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
-      localizationsDelegates: localizationsDelegates,
-      supportedLocales: supportedLocales,
       debugShowCheckedModeBanner: false,
-      onGenerateTitle: onGenerateTitle,
+      title: appName,
       restorationScopeId: appName,
+      theme: ThemeData(
+        scaffoldBackgroundColor: bgColor,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: bgColor,
+          brightness: Brightness.dark,
+        ),
+      ),
       home: const AppRouter(),
       builder: (context, child) {
         return MediaQuery(

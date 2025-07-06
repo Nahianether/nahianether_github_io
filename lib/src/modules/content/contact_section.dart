@@ -80,9 +80,95 @@ class ContactBox extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: defaultPadding * 2),
+          const SizedBox(height: spacing48),
           const ContactForm(),
         ],
+      ),
+    );
+  }
+
+  Widget _buildModernContactCard(
+    String title,
+    String subtitle,
+    String iconPath,
+    Color accentColor,
+    VoidCallback onTap,
+  ) {
+    return Container(
+      width: 280,
+      padding: const EdgeInsets.all(spacing24),
+      decoration: BoxDecoration(
+        gradient: cardGradient,
+        borderRadius: BorderRadius.circular(radiusXL),
+        boxShadow: shadowLG,
+        border: Border.all(
+          color: accentColor.withValues(alpha: 0.2),
+          width: 1,
+        ),
+      ),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(radiusXL),
+        child: Column(
+          children: [
+            Container(
+              width: 64,
+              height: 64,
+              padding: const EdgeInsets.all(spacing16),
+              decoration: BoxDecoration(
+                color: accentColor.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(radiusLG),
+                border: Border.all(
+                  color: accentColor.withValues(alpha: 0.3),
+                  width: 1,
+                ),
+              ),
+              child: Image.asset(
+                iconPath,
+                fit: BoxFit.contain,
+              ),
+            ),
+            const SizedBox(height: spacing16),
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: textLG,
+                fontWeight: FontWeight.w700,
+                color: textPrimary,
+                letterSpacing: 0.3,
+              ),
+            ),
+            const SizedBox(height: spacing4),
+            Text(
+              subtitle,
+              style: const TextStyle(
+                fontSize: textSM,
+                color: textSecondary,
+                fontWeight: FontWeight.w500,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: spacing16),
+            Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: spacing16,
+                vertical: spacing8,
+              ),
+              decoration: BoxDecoration(
+                color: accentColor.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(radiusSM),
+              ),
+              child: Text(
+                'Connect',
+                style: TextStyle(
+                  fontSize: textSM,
+                  fontWeight: FontWeight.w600,
+                  color: accentColor,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
