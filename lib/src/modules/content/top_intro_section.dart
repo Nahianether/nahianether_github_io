@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../constants/constants.dart';
 import '../../constants/size_config/responsive.dart';
@@ -84,7 +85,7 @@ class TopIntroSection extends StatelessWidget {
                     ),
                   ),
                   child: const Text(
-                    '🚀 Senior Flutter Developer • 5+ Years Experience',
+                    '🚀 Senior Flutter & Rust Developer • 5+ Years Experience',
                     style: TextStyle(
                       fontSize: textLG,
                       fontWeight: FontWeight.w600,
@@ -96,7 +97,7 @@ class TopIntroSection extends StatelessWidget {
                 const SizedBox(height: spacing32),
                 // Modern Description
                 const Text(
-                  'Passionate about creating beautiful, performant mobile applications that solve real-world problems. Currently leading Flutter development at Algorithm Generation Limited, building scalable solutions for diverse industries.',
+                  'Passionate about creating beautiful, performant mobile applications and robust system-level software. Currently leading Flutter & Rust development at Algorithm Generation Limited, building scalable solutions for diverse industries.',
                   style: TextStyle(
                     fontSize: textBase,
                     color: textSecondary,
@@ -206,7 +207,15 @@ class TopIntroSection extends StatelessWidget {
                         boxShadow: shadowLG,
                       ),
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          if (contactSectionKey.currentContext != null) {
+                            await Scrollable.ensureVisible(
+                              contactSectionKey.currentContext!,
+                              duration: const Duration(milliseconds: 1000),
+                              curve: Curves.easeInOutCubic,
+                            );
+                          }
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.transparent,
                           shadowColor: Colors.transparent,
@@ -239,7 +248,11 @@ class TopIntroSection extends StatelessWidget {
                         borderRadius: BorderRadius.circular(radiusLG),
                       ),
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          if (!await launchUrl(Uri.parse('https://github.com/Nahianether'))) {
+                            throw 'Could not launch GitHub profile';
+                          }
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.transparent,
                           shadowColor: Colors.transparent,

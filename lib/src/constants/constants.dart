@@ -62,16 +62,16 @@ String diffDate({required DateTime startDate, required DateTime endDate}) {
 
 final skills = [
   'Flutter',
+  'Rust',
   'Dart',
   'Android',
-  'Java',
-  'Rust',
+  'System Programming',
+  'WebAssembly',
   'C/C++',
-  'PHP',
   'Database',
-  'HTML',
-  'CSS',
+  'REST APIs',
   'Web Development',
+  'Backend Development',
 ];
 
 final officeProjects = [

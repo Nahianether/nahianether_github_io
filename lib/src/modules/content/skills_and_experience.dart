@@ -101,6 +101,16 @@ class Skills extends StatelessWidget {
       ],
     },
     {
+      'title': 'Systems Programming',
+      'icon': '🦀',
+      'skills': [
+        {'name': 'Rust', 'level': 0.75},
+        {'name': 'C/C++', 'level': 0.70},
+        {'name': 'System Design', 'level': 0.80},
+        {'name': 'WebAssembly', 'level': 0.65},
+      ],
+    },
+    {
       'title': 'State Management',
       'icon': '⚙️',
       'skills': [
@@ -115,19 +125,9 @@ class Skills extends StatelessWidget {
       'icon': '💾',
       'skills': [
         {'name': 'Firebase', 'level': 0.90},
-        {'name': 'Isar', 'level': 0.85},
-        {'name': 'Hive', 'level': 0.80},
+        {'name': 'Rust Backend', 'level': 0.75},
         {'name': 'REST APIs', 'level': 0.95},
-      ],
-    },
-    {
-      'title': 'Programming Languages',
-      'icon': '💻',
-      'skills': [
-        {'name': 'Dart', 'level': 0.95},
-        {'name': 'Java', 'level': 0.75},
-        {'name': 'Rust', 'level': 0.60},
-        {'name': 'C/C++', 'level': 0.70},
+        {'name': 'Database', 'level': 0.85},
       ],
     },
   ];

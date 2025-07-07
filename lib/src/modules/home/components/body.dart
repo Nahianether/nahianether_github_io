@@ -17,9 +17,9 @@ class Body extends StatelessWidget {
       decoration: const BoxDecoration(
         gradient: backgroundGradient,
       ),
-      child: Responsive(
-        mobile: const MobileBody(),
-        desktop: const DesktopBody(),
+      child: const Responsive(
+        mobile: MobileBody(),
+        desktop: DesktopBody(),
       ),
     );
   }

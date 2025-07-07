@@ -25,8 +25,15 @@ class HomeView extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton.small(
         backgroundColor: kDefaultColor,
-        onPressed: () async => await Scrollable.ensureVisible(topMenubarSectionKey.currentContext!,
-            duration: const Duration(milliseconds: 1000), curve: Curves.easeInOutCubic),
+        onPressed: () async {
+          if (topIntroSectionKey.currentContext != null) {
+            await Scrollable.ensureVisible(
+              topIntroSectionKey.currentContext!,
+              duration: const Duration(milliseconds: 1000), 
+              curve: Curves.easeInOutCubic,
+            );
+          }
+        },
         child: const Icon(Icons.arrow_upward_sharp, size: 20.0),
       ),
       drawer: Responsive.isDesktop(context)
