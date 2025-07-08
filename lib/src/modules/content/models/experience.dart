@@ -42,18 +42,18 @@ List<Experience> experiences = [
   Experience(
     designations: [
       Designation(
-        title: 'Senior Flutter Developer',
+        title: 'Senior Developer',
         startDate: DateTime.parse('2023-09-01 00:00:00.000'),
-        endDate: DateTime.parse('2024-10-14 00:00:00.000'),
+        endDate: DateTime.parse('2024-10-01 00:00:00.000'),
       ),
       Designation(
-        title: 'Flutter Developer',
+        title: 'Developer',
         startDate: DateTime.parse('2022-09-01 00:00:00.000'),
         endDate: DateTime.parse('2023-09-01 00:00:00.000'),
       ),
       Designation(
-        title: 'Junior Flutter Developer',
-        startDate: DateTime.parse('2021-06-01 00:00:00.000'),
+        title: 'Junior Developer',
+        startDate: DateTime.parse('2021-07-01 00:00:00.000'),
         endDate: DateTime.parse('2022-09-01 00:00:00.000'),
       ),
     ],

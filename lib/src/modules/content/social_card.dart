@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../constants/constants.dart';
+import '../../providers/ui_providers.dart';
 
-class SocalCard extends StatefulWidget {
+class SocalCard extends ConsumerWidget {
   const SocalCard({
     super.key,
     required this.iconSrc,
@@ -16,20 +18,16 @@ class SocalCard extends StatefulWidget {
   final void Function()? onTap;
 
   @override
-  SocalCardState createState() => SocalCardState();
-}
-
-class SocalCardState extends State<SocalCard> {
-  bool isHover = false;
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final cardId = '$iconSrc-$name'; // Create unique ID for this social card
+    final isHover = ref.watch(socialCardHoverProvider(cardId));
+    final actions = UIActions(ref);
+    
     return FittedBox(
       child: InkWell(
-        onTap: widget.onTap,
+        onTap: onTap,
         onHover: (value) {
-          setState(() {
-            isHover = value;
-          });
+          actions.setSocialCardHover(cardId, value);
         },
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
@@ -38,7 +36,7 @@ class SocalCardState extends State<SocalCard> {
             horizontal: defaultPadding * 1.5,
           ),
           decoration: BoxDecoration(
-            color: widget.color,
+            color: color,
             borderRadius: BorderRadius.circular(10),
             boxShadow: [
               if (isHover)
@@ -52,12 +50,12 @@ class SocalCardState extends State<SocalCard> {
           child: Row(
             children: [
               Image.asset(
-                widget.iconSrc,
+                iconSrc,
                 height: 70,
                 width: 70,
               ),
               const SizedBox(width: defaultPadding),
-              Text(widget.name),
+              Text(name),
             ],
           ),
         ),

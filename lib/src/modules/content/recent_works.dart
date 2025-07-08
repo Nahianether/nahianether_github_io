@@ -544,7 +544,7 @@ class RecentWorks extends ConsumerWidget {
                 ),
                 const SizedBox(height: spacing20),
                 ShaderMask(
-                  shaderCallback: (bounds) => LinearGradient(
+                  shaderCallback: (bounds) => const LinearGradient(
                     colors: [secondaryColor, primaryColor],
                   ).createShader(bounds),
                   child: Text(

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../components/default_button.dart';
-import '../../components/section_title.dart';
 import '../../constants/constants.dart';
 import '../../constants/size_config/responsive.dart';
-import 'social_card.dart';
+import '../../providers/ui_providers.dart';
 
 class ContactSection extends StatelessWidget {
   const ContactSection({super.key});
@@ -270,36 +269,20 @@ class ContactBox extends StatelessWidget {
   }
 }
 
-class ContactForm extends StatefulWidget {
+class ContactForm extends ConsumerWidget {
   const ContactForm({
     super.key,
   });
 
   @override
-  State<ContactForm> createState() => _ContactFormState();
-}
-
-class _ContactFormState extends State<ContactForm> {
-  final _formKey = GlobalKey<FormState>();
-
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController projectTypeController = TextEditingController();
-  final TextEditingController projectBudgetController = TextEditingController();
-  final TextEditingController descriptionController = TextEditingController();
-
-  @override
-  void dispose() {
-    nameController.dispose();
-    emailController.dispose();
-    projectTypeController.dispose();
-    projectBudgetController.dispose();
-    descriptionController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final formKey = ref.watch(contactFormKeyProvider);
+    final nameController = ref.watch(nameControllerProvider);
+    final emailController = ref.watch(emailControllerProvider);
+    final projectTypeController = ref.watch(projectTypeControllerProvider);
+    final projectBudgetController = ref.watch(projectBudgetControllerProvider);
+    final descriptionController = ref.watch(descriptionControllerProvider);
+    
     return Column(
       children: [
         // Form Header
@@ -325,7 +308,7 @@ class _ContactFormState extends State<ContactForm> {
         const SizedBox(height: spacing40),
         // Form Fields
         Form(
-          key: _formKey,
+          key: formKey,
           child: Column(
             children: [
               // Name and Email Row
@@ -492,7 +475,7 @@ class _ContactFormState extends State<ContactForm> {
                 ),
                 child: ElevatedButton(
                   onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
+                    if (formKey.currentState!.validate()) {
                       String subject = 'New Project Inquiry - ${projectTypeController.text}';
                       String body =
                           'Hello Intishar,\n\nI would like to discuss a project with you.\n\nName: ${nameController.text}\nEmail: ${emailController.text}\nProject Type: ${projectTypeController.text}\nProject Budget: ${projectBudgetController.text}\n\nProject Description:\n${descriptionController.text}\n\nBest regards,\n${nameController.text}';
@@ -573,12 +556,12 @@ class _ContactFormState extends State<ContactForm> {
           labelText: label,
           hintText: hint,
           prefixIcon: Icon(icon, color: primaryColor),
-          labelStyle: TextStyle(
+          labelStyle: const TextStyle(
             color: textSecondary,
             fontSize: textSM,
             fontWeight: FontWeight.w500,
           ),
-          hintStyle: TextStyle(
+          hintStyle: const TextStyle(
             color: textMuted,
             fontSize: textSM,
           ),

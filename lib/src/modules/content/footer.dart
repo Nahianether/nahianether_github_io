@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../constants/constants.dart';
 import '../../constants/size_config/responsive.dart';
+import '../../providers/ui_providers.dart';
 
 class Footer extends StatelessWidget {
   const Footer({
@@ -239,7 +241,7 @@ class FooterAllSocialsLinks extends StatelessWidget {
   }
 }
 
-class SocialLink extends StatefulWidget {
+class SocialLink extends ConsumerWidget {
   const SocialLink({
     super.key,
     required this.imgPath,
@@ -256,17 +258,14 @@ class SocialLink extends StatefulWidget {
   final Color color;
 
   @override
-  State<SocialLink> createState() => _SocialLinkState();
-}
-
-class _SocialLinkState extends State<SocialLink> {
-  bool isHovered = false;
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final linkId = '$imgPath-$link'; // Create unique ID for this social link
+    final isHovered = ref.watch(socialLinkHoverProvider(linkId));
+    final actions = UIActions(ref);
+    
     return MouseRegion(
-      onEnter: (_) => setState(() => isHovered = true),
-      onExit: (_) => setState(() => isHovered = false),
+      onEnter: (_) => actions.setSocialLinkHover(linkId, true),
+      onExit: (_) => actions.setSocialLinkHover(linkId, false),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.all(spacing12),
@@ -274,13 +273,13 @@ class _SocialLinkState extends State<SocialLink> {
           gradient: isHovered
               ? LinearGradient(
                   colors: [
-                    widget.color.withValues(alpha: 0.2),
-                    widget.color.withValues(alpha: 0.1),
+                    color.withValues(alpha: 0.2),
+                    color.withValues(alpha: 0.1),
                   ],
                 )
-              : widget.isInDrawer
+              : isInDrawer
                   ? glassGradient
-                  : LinearGradient(
+                  : const LinearGradient(
                       colors: [
                         cardColor,
                         surfaceColor,
@@ -289,8 +288,8 @@ class _SocialLinkState extends State<SocialLink> {
           borderRadius: BorderRadius.circular(radiusLG),
           border: Border.all(
             color: isHovered
-                ? widget.color.withValues(alpha: 0.5)
-                : widget.isInDrawer
+                ? color.withValues(alpha: 0.5)
+                : isInDrawer
                     ? primaryColor.withValues(alpha: 0.3)
                     : borderColor,
             width: 1,
@@ -298,7 +297,7 @@ class _SocialLinkState extends State<SocialLink> {
           boxShadow: isHovered
               ? [
                   BoxShadow(
-                    color: widget.color.withValues(alpha: 0.3),
+                    color: color.withValues(alpha: 0.3),
                     blurRadius: 15,
                     spreadRadius: 2,
                   ),
@@ -307,22 +306,22 @@ class _SocialLinkState extends State<SocialLink> {
         ),
         child: InkWell(
           onTap: () async {
-            if (widget.isInDrawer) Navigator.pop(context);
-            if (!await launchUrl(Uri.parse(widget.link))) {
-              throw 'Could not launch ${widget.link}';
+            if (isInDrawer) Navigator.pop(context);
+            if (!await launchUrl(Uri.parse(link))) {
+              throw 'Could not launch $link';
             }
           },
           borderRadius: BorderRadius.circular(radiusLG),
           child: Tooltip(
-            message: widget.tooltip,
+            message: tooltip,
             child: SvgPicture.asset(
-              widget.imgPath,
+              imgPath,
               height: 24.0,
               width: 24.0,
               colorFilter: ColorFilter.mode(
                 isHovered
-                    ? widget.color
-                    : widget.isInDrawer
+                    ? color
+                    : isInDrawer
                         ? primaryColor
                         : textSecondary,
                 BlendMode.srcIn,
@@ -331,7 +330,7 @@ class _SocialLinkState extends State<SocialLink> {
                 width: 24,
                 height: 24,
                 decoration: BoxDecoration(
-                  color: widget.color.withValues(alpha: 0.1),
+                  color: color.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(radiusXS),
                 ),
                 child: const Center(

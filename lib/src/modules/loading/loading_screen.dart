@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:math' as math;
 
 import '../../constants/constants.dart';
 import '../../constants/size_config/responsive.dart';
+import '../../providers/ui_providers.dart';
 
-class LoadingScreen extends StatefulWidget {
+class LoadingScreen extends ConsumerWidget {
   final VoidCallback? onLoadingComplete;
   
   const LoadingScreen({
@@ -12,24 +14,8 @@ class LoadingScreen extends StatefulWidget {
     this.onLoadingComplete,
   });
 
-  @override
-  State<LoadingScreen> createState() => _LoadingScreenState();
-}
-
-class _LoadingScreenState extends State<LoadingScreen>
-    with TickerProviderStateMixin {
-  late AnimationController _rotationController;
-  late AnimationController _scaleController;
-  late AnimationController _fadeController;
-  late AnimationController _progressController;
-  
-  late Animation<double> _rotationAnimation;
-  late Animation<double> _scaleAnimation;
-  late Animation<double> _fadeAnimation;
-  late Animation<double> _progressAnimation;
-
   // Programming language icons and names
-  final List<Map<String, String>> programmingLanguages = [
+  static const List<Map<String, String>> programmingLanguages = [
     {'name': 'Flutter', 'icon': '💙', 'color': '0xFF0175C2'},
     {'name': 'Rust', 'icon': '🦀', 'color': '0xFFCE422B'},
     {'name': 'Dart', 'icon': '🎯', 'color': '0xFF0175C2'},
@@ -40,91 +26,69 @@ class _LoadingScreenState extends State<LoadingScreen>
     {'name': 'Node.js', 'icon': '💚', 'color': '0xFF339933'},
   ];
 
-  @override
-  void initState() {
-    super.initState();
+  void _startAnimations(WidgetRef ref) async {
+    final controllers = ref.read(loadingScreenAnimationControllersProvider);
+    final actions = UIActions(ref);
     
-    _rotationController = AnimationController(
-      duration: const Duration(seconds: 3),
-      vsync: this,
-    );
-    
-    _scaleController = AnimationController(
-      duration: const Duration(milliseconds: 2000),
-      vsync: this,
-    );
-    
-    _fadeController = AnimationController(
-      duration: const Duration(milliseconds: 1500),
-      vsync: this,
-    );
-    
-    _progressController = AnimationController(
-      duration: const Duration(seconds: 4),
-      vsync: this,
-    );
-
-    _rotationAnimation = Tween<double>(
-      begin: 0,
-      end: 2 * math.pi,
-    ).animate(CurvedAnimation(
-      parent: _rotationController,
-      curve: Curves.linear,
-    ));
-
-    _scaleAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _scaleController,
-      curve: Curves.elasticOut,
-    ));
-
-    _fadeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _fadeController,
-      curve: Curves.easeInOut,
-    ));
-    
-    _progressAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _progressController,
-      curve: Curves.easeInOut,
-    ));
-
-    _startAnimations();
-  }
-
-  void _startAnimations() async {
     // Start all animations
-    _fadeController.forward();
+    controllers.fade.forward();
     await Future.delayed(const Duration(milliseconds: 300));
-    _scaleController.forward();
-    _rotationController.repeat();
-    _progressController.forward();
+    controllers.scale.forward();
+    controllers.rotation.repeat();
+    controllers.progress.forward();
+    
+    // Update loading progress
+    actions.updateLoadingProgress(1.0);
     
     // Complete loading after animations
     await Future.delayed(const Duration(seconds: 3));
-    if (widget.onLoadingComplete != null) {
-      widget.onLoadingComplete!();
+    if (onLoadingComplete != null) {
+      onLoadingComplete!();
     }
   }
 
   @override
-  void dispose() {
-    _rotationController.dispose();
-    _scaleController.dispose();
-    _fadeController.dispose();
-    _progressController.dispose();
-    super.dispose();
-  }
+  Widget build(BuildContext context, WidgetRef ref) {
+    final controllers = ref.watch(loadingScreenAnimationControllersProvider);
+    
+    // Create animations
+    final rotationAnimation = Tween<double>(
+      begin: 0,
+      end: 2 * math.pi,
+    ).animate(CurvedAnimation(
+      parent: controllers.rotation,
+      curve: Curves.linear,
+    ));
 
-  @override
-  Widget build(BuildContext context) {
+    final scaleAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(
+      parent: controllers.scale,
+      curve: Curves.elasticOut,
+    ));
+
+    final fadeAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(
+      parent: controllers.fade,
+      curve: Curves.easeInOut,
+    ));
+    
+    final progressAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(
+      parent: controllers.progress,
+      curve: Curves.easeInOut,
+    ));
+
+    // Start animations on first build
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _startAnimations(ref);
+    });
+
     return Scaffold(
       backgroundColor: bgColor,
       body: Container(
@@ -135,10 +99,10 @@ class _LoadingScreenState extends State<LoadingScreen>
         ),
         child: AnimatedBuilder(
           animation: Listenable.merge([
-            _rotationAnimation,
-            _scaleAnimation,
-            _fadeAnimation,
-            _progressAnimation,
+            rotationAnimation,
+            scaleAnimation,
+            fadeAnimation,
+            progressAnimation,
           ]),
           builder: (context, child) {
             return Center(
@@ -147,9 +111,9 @@ class _LoadingScreenState extends State<LoadingScreen>
                 children: [
                   // Main logo/title
                   FadeTransition(
-                    opacity: _fadeAnimation,
+                    opacity: fadeAnimation,
                     child: ScaleTransition(
-                      scale: _scaleAnimation,
+                      scale: scaleAnimation,
                       child: ShaderMask(
                         shaderCallback: (bounds) => primaryGradient.createShader(bounds),
                         child: Text(
@@ -169,7 +133,7 @@ class _LoadingScreenState extends State<LoadingScreen>
                   
                   // Subtitle
                   FadeTransition(
-                    opacity: _fadeAnimation,
+                    opacity: fadeAnimation,
                     child: Text(
                       'Flutter & Rust Developer',
                       style: TextStyle(
@@ -185,7 +149,7 @@ class _LoadingScreenState extends State<LoadingScreen>
                   
                   // Programming language icons circle
                   ScaleTransition(
-                    scale: _scaleAnimation,
+                    scale: scaleAnimation,
                     child: SizedBox(
                       width: Responsive.isDesktop(context) ? 300 : 250,
                       height: Responsive.isDesktop(context) ? 300 : 250,
@@ -213,14 +177,14 @@ class _LoadingScreenState extends State<LoadingScreen>
                           // Rotating programming language icons
                           ...List.generate(programmingLanguages.length, (index) {
                             final angle = (2 * math.pi / programmingLanguages.length) * index;
-                            final adjustedAngle = angle + _rotationAnimation.value;
+                            final adjustedAngle = angle + rotationAnimation.value;
                             final radius = Responsive.isDesktop(context) ? 120.0 : 100.0;
                             
                             return Positioned(
                               left: 150 + radius * math.cos(adjustedAngle) - 30,
                               top: 150 + radius * math.sin(adjustedAngle) - 30,
                               child: Transform.rotate(
-                                angle: -_rotationAnimation.value, // Counter-rotate to keep icons upright
+                                angle: -rotationAnimation.value, // Counter-rotate to keep icons upright
                                 child: Container(
                                   width: 60,
                                   height: 60,
@@ -258,10 +222,10 @@ class _LoadingScreenState extends State<LoadingScreen>
                   
                   // Loading progress bar
                   FadeTransition(
-                    opacity: _fadeAnimation,
+                    opacity: fadeAnimation,
                     child: Column(
                       children: [
-                        Text(
+                        const Text(
                           'Loading Portfolio...',
                           style: TextStyle(
                             fontSize: textBase,
@@ -280,7 +244,7 @@ class _LoadingScreenState extends State<LoadingScreen>
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: Container(
-                              width: (Responsive.isDesktop(context) ? 300 : 250) * _progressAnimation.value,
+                              width: (Responsive.isDesktop(context) ? 300 : 250) * progressAnimation.value,
                               height: 4,
                               decoration: BoxDecoration(
                                 gradient: primaryGradient,
@@ -297,8 +261,8 @@ class _LoadingScreenState extends State<LoadingScreen>
                         ),
                         const SizedBox(height: spacing12),
                         Text(
-                          '${(_progressAnimation.value * 100).toInt()}%',
-                          style: TextStyle(
+                          '${(progressAnimation.value * 100).toInt()}%',
+                          style: const TextStyle(
                             fontSize: textSM,
                             color: primaryColor,
                             fontWeight: FontWeight.w600,

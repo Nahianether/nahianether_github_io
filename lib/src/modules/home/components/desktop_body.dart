@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../constants/constants.dart';
+import '../../../providers/ui_providers.dart';
 import '../../content/contact_section.dart';
 import '../../content/footer.dart';
 import '../../content/k_divider.dart';
@@ -10,26 +12,23 @@ import '../../content/top_intro_section.dart';
 import '../../content/top_menu_bar.dart';
 import '../../service-break/service_break_banner.dart';
 
-class DesktopBody extends StatefulWidget {
+class DesktopBody extends ConsumerWidget {
   const DesktopBody({super.key});
 
-  @override
-  State<DesktopBody> createState() => _BodyState();
-}
-
-class _BodyState extends State<DesktopBody> {
-  bool isMaintainence = isGlobalMaintainence;
-  double height = 38.0;
-  final ScrollController _scrollController = ScrollController();
+  static final ScrollController _scrollController = ScrollController();
 
   @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isMaintenanceVisible = ref.watch(isMaintenanceBannerVisibleProvider);
+    final actions = UIActions(ref);
+    
+    // Set initial maintenance state based on global config
+    if (isGlobalMaintainence && !isMaintenanceVisible) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        actions.showMaintenanceBanner();
+      });
+    }
 
-  @override
-  Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
       height: double.infinity,
@@ -45,16 +44,19 @@ class _BodyState extends State<DesktopBody> {
               constraints: const BoxConstraints(maxWidth: maxWidth),
               child: Column(
                 children: [
-                  if (isMaintainence)
-                    ServiceBreakBanner(
-                      height: height,
-                      onPressed: () => setState(() {
-                        height = 0.0;
-                        Future.delayed(const Duration(milliseconds: 350), () {
-                          isMaintainence = false;
-                        });
-                      }),
-                    ),
+                  // Maintenance banner with smooth animation
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 350),
+                    height: isMaintenanceVisible ? 38.0 : 0.0,
+                    child: isMaintenanceVisible
+                        ? ServiceBreakBanner(
+                            height: 38.0,
+                            onPressed: () {
+                              actions.hideMaintenanceBanner();
+                            },
+                          )
+                        : const SizedBox.shrink(),
+                  ),
                   const SizedBox(height: 80),
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: defaultPadding * 2, vertical: defaultPadding * 0.5),

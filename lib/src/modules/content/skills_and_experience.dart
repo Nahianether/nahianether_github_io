@@ -94,20 +94,9 @@ class Skills extends StatelessWidget {
       'title': 'Mobile Development',
       'icon': '📱',
       'skills': [
-        {'name': 'Flutter', 'level': 0.95},
-        {'name': 'Dart', 'level': 0.95},
-        {'name': 'Android', 'level': 0.85},
-        {'name': 'iOS', 'level': 0.75},
-      ],
-    },
-    {
-      'title': 'Systems Programming',
-      'icon': '🦀',
-      'skills': [
-        {'name': 'Rust', 'level': 0.75},
-        {'name': 'C/C++', 'level': 0.70},
-        {'name': 'System Design', 'level': 0.80},
-        {'name': 'WebAssembly', 'level': 0.65},
+        {'name': 'Flutter', 'level': 0.90},
+        {'name': 'Android', 'level': 0.65},
+        {'name': 'iOS', 'level': 0.40},
       ],
     },
     {
@@ -115,22 +104,58 @@ class Skills extends StatelessWidget {
       'icon': '⚙️',
       'skills': [
         {'name': 'Riverpod', 'level': 0.90},
-        {'name': 'Provider', 'level': 0.85},
-        {'name': 'Bloc', 'level': 0.80},
-        {'name': 'GetX', 'level': 0.70},
+        {'name': 'Provider', 'level': 0.90},
+        {'name': 'Bloc', 'level': 0.75},
+        {'name': 'GetX', 'level': 0.60},
+        {'name': 'SetState', 'level': 0.70},
       ],
     },
     {
-      'title': 'Backend & Database',
+      'title': 'Systems Programming',
+      'icon': '🦀',
+      'skills': [
+        {'name': 'Rust', 'level': 0.80},
+        {'name': 'C/C++', 'level': 0.70},
+        {'name': 'Assembly', 'level': 0.60},
+        {'name': 'System Design', 'level': 0.60},
+      ],
+    },
+    {
+      'title': 'Database',
       'icon': '💾',
       'skills': [
-        {'name': 'Firebase', 'level': 0.90},
-        {'name': 'Rust Backend', 'level': 0.75},
-        {'name': 'REST APIs', 'level': 0.95},
-        {'name': 'Database', 'level': 0.85},
+        {'name': 'Isar', 'level': 0.90},
+        {'name': 'Hive', 'level': 0.90},
+        {'name': 'Firebase', 'level': 0.85},
+        {'name': 'SQLite', 'level': 0.80},
+        {'name': 'ClickHouse', 'level': 0.70},
+      ],
+    },
+    {
+      'title': 'Backend Languages',
+      'icon': '⚡',
+      'skills': [
+        {'name': 'Dart', 'level': 0.90},
+        {'name': 'Java', 'level': 0.70},
+        {'name': 'PHP', 'level': 0.60},
+      ],
+    },
+    {
+      'title': 'Communication Protocol',
+      'icon': '🌐',
+      'skills': [
+        {'name': 'WebSocket', 'level': 0.90},
+        {'name': 'REST API', 'level': 0.90},
+        {'name': 'gRPC', 'level': 0.80},
       ],
     },
   ];
+
+  // Convert percentage to star rating (1-5 stars)
+  String getStarRating(double level) {
+    int stars = (level * 5).round();
+    return '★' * stars + '☆' * (5 - stars);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -167,110 +192,119 @@ class Skills extends StatelessWidget {
           ],
         ),
         const SizedBox(height: spacing32),
-        // Compact Skills Grid
-        GridView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: Responsive.isDesktop(context) ? 2 : 1,
-            childAspectRatio: 2.2,
-            crossAxisSpacing: spacing20,
-            mainAxisSpacing: spacing20,
+        // Flexible Skills Layout
+        if (Responsive.isDesktop(context))
+          // Desktop: 2 columns with flexible heights
+          Wrap(
+            spacing: spacing20,
+            runSpacing: spacing20,
+            children: skillCategories.map((category) {
+              return SizedBox(
+                width: (MediaQuery.of(context).size.width - spacing64 * 2 - spacing48 - spacing20) / 2,
+                child: _buildSkillCard(category),
+              );
+            }).toList(),
+          )
+        else
+          // Mobile: Single column
+          Column(
+            children: skillCategories.map((category) {
+              return Container(
+                margin: const EdgeInsets.only(bottom: spacing20),
+                child: _buildSkillCard(category),
+              );
+            }).toList(),
           ),
-          itemCount: skillCategories.length,
-          itemBuilder: (context, index) {
-            final category = skillCategories[index];
-            return Container(
-              padding: const EdgeInsets.all(spacing20),
-              decoration: BoxDecoration(
-                gradient: cardGradient,
-                borderRadius: BorderRadius.circular(radiusLG),
-                boxShadow: shadowMD,
-                border: Border.all(
-                  color: primaryColor.withValues(alpha: 0.1),
-                  width: 1,
+      ],
+    );
+  }
+
+  Widget _buildSkillCard(Map<String, dynamic> category) {
+    return Container(
+      padding: const EdgeInsets.all(spacing20),
+      decoration: BoxDecoration(
+        gradient: cardGradient,
+        borderRadius: BorderRadius.circular(radiusLG),
+        boxShadow: shadowMD,
+        border: Border.all(
+          color: primaryColor.withValues(alpha: 0.1),
+          width: 1,
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Compact Category Header
+          Row(
+            children: [
+              Text(
+                category['icon'],
+                style: const TextStyle(fontSize: textXL),
+              ),
+              const SizedBox(width: spacing8),
+              Expanded(
+                child: Text(
+                  category['title'],
+                  style: const TextStyle(
+                    fontSize: textBase,
+                    fontWeight: FontWeight.w700,
+                    color: textPrimary,
+                    letterSpacing: 0.3,
+                  ),
                 ),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Compact Category Header
-                  Row(
-                    children: [
-                      Text(
-                        category['icon'],
-                        style: const TextStyle(fontSize: textXL),
-                      ),
-                      const SizedBox(width: spacing8),
-                      Expanded(
-                        child: Text(
-                          category['title'],
-                          style: const TextStyle(
-                            fontSize: textBase,
-                            fontWeight: FontWeight.w700,
-                            color: textPrimary,
-                            letterSpacing: 0.3,
+            ],
+          ),
+          const SizedBox(height: spacing16),
+          // Compact Skills List
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: (category['skills'] as List).map<Widget>((skill) {
+              return Container(
+                margin: const EdgeInsets.only(bottom: spacing6),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 4,
+                      height: 4,
+                      decoration: BoxDecoration(
+                        color: primaryColor,
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: primaryColor.withValues(alpha: 0.3),
+                            blurRadius: 2,
                           ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: spacing16),
-                  // Compact Skills List
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: (category['skills'] as List).map<Widget>((skill) {
-                          return Container(
-                            margin: const EdgeInsets.only(bottom: spacing6),
-                            child: Row(
-                              children: [
-                                Container(
-                                  width: 4,
-                                  height: 4,
-                                  decoration: BoxDecoration(
-                                    color: primaryColor,
-                                    shape: BoxShape.circle,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: primaryColor.withValues(alpha: 0.3),
-                                        blurRadius: 2,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(width: spacing6),
-                                Expanded(
-                                  child: Text(
-                                    skill['name'],
-                                    style: const TextStyle(
-                                      fontSize: textXS,
-                                      fontWeight: FontWeight.w500,
-                                      color: textSecondary,
-                                    ),
-                                  ),
-                                ),
-                                Text(
-                                  '${(skill['level'] * 100).toInt()}%',
-                                  style: const TextStyle(
-                                    fontSize: textXS,
-                                    fontWeight: FontWeight.w600,
-                                    color: secondaryColor,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        }).toList(),
+                        ],
                       ),
                     ),
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
-      ],
+                    const SizedBox(width: spacing6),
+                    Expanded(
+                      child: Text(
+                        skill['name'],
+                        style: const TextStyle(
+                          fontSize: textXS,
+                          fontWeight: FontWeight.w500,
+                          color: textSecondary,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      getStarRating(skill['level']),
+                      style: const TextStyle(
+                        fontSize: textSM,
+                        fontWeight: FontWeight.w600,
+                        color: secondaryColor,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }).toList(),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -383,44 +417,49 @@ class Experience extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: spacing12),
-                  // Latest Position
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: spacing12,
-                      vertical: spacing6,
-                    ),
-                    decoration: BoxDecoration(
-                      color: primaryColor.withValues(alpha: 0.1),
-                      borderRadius: BorderRadius.circular(radiusXS),
-                      border: Border.all(
-                        color: primaryColor.withValues(alpha: 0.2),
-                        width: 1,
-                      ),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          experience.designations.first.title,
-                          style: const TextStyle(
-                            fontSize: textSM,
-                            color: textSecondary,
-                            fontWeight: FontWeight.w600,
+                  // All Positions
+                  Column(
+                    children: experience.designations.map((designation) {
+                      return Container(
+                        margin: const EdgeInsets.only(bottom: spacing8),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: spacing12,
+                          vertical: spacing6,
+                        ),
+                        decoration: BoxDecoration(
+                          color: primaryColor.withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(radiusXS),
+                          border: Border.all(
+                            color: primaryColor.withValues(alpha: 0.2),
+                            width: 1,
                           ),
                         ),
-                        const SizedBox(height: spacing2),
-                        Text(
-                          experience.designations.first.endDate == null
-                              ? '${getFormatedDate(experience.designations.first.startDate)} - Present'
-                              : '${getFormatedDate(experience.designations.first.startDate)} - ${getFormatedDate(experience.designations.first.endDate!)}',
-                          style: const TextStyle(
-                            fontSize: textXS,
-                            color: secondaryColor,
-                            fontWeight: FontWeight.w600,
-                          ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              designation.title,
+                              style: const TextStyle(
+                                fontSize: textSM,
+                                color: textSecondary,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            const SizedBox(height: spacing2),
+                            Text(
+                              designation.endDate == null
+                                  ? '${getFormatedDate(designation.startDate)} - Present'
+                                  : '${getFormatedDate(designation.startDate)} - ${getFormatedDate(designation.endDate!)}',
+                              style: const TextStyle(
+                                fontSize: textXS,
+                                color: secondaryColor,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      );
+                    }).toList(),
                   ),
                 ],
               ),
