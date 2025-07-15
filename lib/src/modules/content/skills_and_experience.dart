@@ -206,14 +206,20 @@ class Skills extends StatelessWidget {
             }).toList(),
           )
         else
-          // Mobile: Single column
-          Column(
-            children: skillCategories.map((category) {
-              return Container(
-                margin: const EdgeInsets.only(bottom: spacing20),
-                child: _buildSkillCard(category),
-              );
-            }).toList(),
+          // Mobile: Single column with responsive grid
+          GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 1,
+              childAspectRatio: 3.0, // Increased from 2.5 to prevent overflow
+              crossAxisSpacing: spacing16,
+              mainAxisSpacing: spacing16,
+            ),
+            itemCount: skillCategories.length,
+            itemBuilder: (context, index) {
+              return _buildSkillCard(skillCategories[index]);
+            },
           ),
       ],
     );
@@ -258,50 +264,52 @@ class Skills extends StatelessWidget {
           ),
           const SizedBox(height: spacing16),
           // Compact Skills List
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: (category['skills'] as List).map<Widget>((skill) {
-              return Container(
-                margin: const EdgeInsets.only(bottom: spacing6),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 4,
-                      height: 4,
-                      decoration: BoxDecoration(
-                        color: primaryColor,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: primaryColor.withValues(alpha: 0.3),
-                            blurRadius: 2,
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(width: spacing6),
-                    Expanded(
-                      child: Text(
-                        skill['name'],
-                        style: const TextStyle(
-                          fontSize: textXS,
-                          fontWeight: FontWeight.w500,
-                          color: textSecondary,
+          Flexible(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: (category['skills'] as List).map<Widget>((skill) {
+                return Container(
+                  margin: const EdgeInsets.only(bottom: spacing4),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 4,
+                        height: 4,
+                        decoration: BoxDecoration(
+                          color: primaryColor,
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: primaryColor.withValues(alpha: 0.3),
+                              blurRadius: 2,
+                            ),
+                          ],
                         ),
                       ),
-                    ),
-                    Text(
-                      getStarRating(skill['level']),
-                      style: const TextStyle(
-                        fontSize: textSM,
-                        fontWeight: FontWeight.w600,
-                        color: secondaryColor,
+                      const SizedBox(width: spacing6),
+                      Expanded(
+                        child: Text(
+                          skill['name'],
+                          style: const TextStyle(
+                            fontSize: textXS,
+                            fontWeight: FontWeight.w500,
+                            color: textSecondary,
+                          ),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              );
-            }).toList(),
+                      Text(
+                        getStarRating(skill['level']),
+                        style: const TextStyle(
+                          fontSize: textSM,
+                          fontWeight: FontWeight.w600,
+                          color: secondaryColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }).toList(),
+            ),
           ),
         ],
       ),

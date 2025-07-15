@@ -197,86 +197,174 @@ class TopIntroSection extends StatelessWidget {
                 //   ),
                 // ),
                 const SizedBox(height: spacing48),
-                // Modern CTA Buttons
-                Row(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        gradient: primaryGradient,
-                        borderRadius: BorderRadius.circular(radiusLG),
-                        boxShadow: shadowLG,
-                      ),
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          if (contactSectionKey.currentContext != null) {
-                            await Scrollable.ensureVisible(
-                              contactSectionKey.currentContext!,
-                              duration: const Duration(milliseconds: 1000),
-                              curve: Curves.easeInOutCubic,
-                            );
-                          }
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.transparent,
-                          shadowColor: Colors.transparent,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: spacing32,
-                            vertical: spacing16,
+                // Modern CTA Buttons - Mobile Responsive
+                if (Responsive.isDesktop(context))
+                  Row(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          gradient: primaryGradient,
+                          borderRadius: BorderRadius.circular(radiusLG),
+                          boxShadow: shadowLG,
+                        ),
+                        child: ElevatedButton(
+                          onPressed: () async {
+                            if (contactSectionKey.currentContext != null) {
+                              await Scrollable.ensureVisible(
+                                contactSectionKey.currentContext!,
+                                duration: const Duration(milliseconds: 1000),
+                                curve: Curves.easeInOutCubic,
+                              );
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.transparent,
+                            shadowColor: Colors.transparent,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: spacing32,
+                              vertical: spacing16,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(radiusLG),
+                            ),
                           ),
-                          shape: RoundedRectangleBorder(
+                          child: const Text(
+                            'Get In Touch',
+                            style: TextStyle(
+                              fontSize: textBase,
+                              fontWeight: FontWeight.w600,
+                              color: white,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: spacing20),
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: primaryColor.withValues(alpha: 0.3),
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.circular(radiusLG),
+                        ),
+                        child: ElevatedButton(
+                          onPressed: () async {
+                            if (!await launchUrl(Uri.parse('https://github.com/Nahianether'))) {
+                              throw 'Could not launch GitHub profile';
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.transparent,
+                            shadowColor: Colors.transparent,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: spacing32,
+                              vertical: spacing16,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(radiusLG),
+                            ),
+                          ),
+                          child: const Text(
+                            'View Projects',
+                            style: TextStyle(
+                              fontSize: textBase,
+                              fontWeight: FontWeight.w600,
+                              color: primaryColor,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                else
+                  // Mobile: Stack buttons vertically
+                  Column(
+                    children: [
+                      SizedBox(
+                        width: double.infinity,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            gradient: primaryGradient,
+                            borderRadius: BorderRadius.circular(radiusLG),
+                            boxShadow: shadowLG,
+                          ),
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              if (contactSectionKey.currentContext != null) {
+                                await Scrollable.ensureVisible(
+                                  contactSectionKey.currentContext!,
+                                  duration: const Duration(milliseconds: 1000),
+                                  curve: Curves.easeInOutCubic,
+                                );
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.transparent,
+                              shadowColor: Colors.transparent,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: spacing24,
+                                vertical: spacing16,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(radiusLG),
+                              ),
+                            ),
+                            child: const Text(
+                              'Get In Touch',
+                              style: TextStyle(
+                                fontSize: textBase,
+                                fontWeight: FontWeight.w600,
+                                color: white,
+                                letterSpacing: 0.5,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: spacing16),
+                      SizedBox(
+                        width: double.infinity,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: primaryColor.withValues(alpha: 0.3),
+                              width: 1,
+                            ),
                             borderRadius: BorderRadius.circular(radiusLG),
                           ),
-                        ),
-                        child: const Text(
-                          'Get In Touch',
-                          style: TextStyle(
-                            fontSize: textBase,
-                            fontWeight: FontWeight.w600,
-                            color: white,
-                            letterSpacing: 0.5,
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              if (!await launchUrl(Uri.parse('https://github.com/Nahianether'))) {
+                                throw 'Could not launch GitHub profile';
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.transparent,
+                              shadowColor: Colors.transparent,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: spacing24,
+                                vertical: spacing16,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(radiusLG),
+                              ),
+                            ),
+                            child: const Text(
+                              'View Projects',
+                              style: TextStyle(
+                                fontSize: textBase,
+                                fontWeight: FontWeight.w600,
+                                color: primaryColor,
+                                letterSpacing: 0.5,
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(width: spacing20),
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: primaryColor.withValues(alpha: 0.3),
-                          width: 1,
-                        ),
-                        borderRadius: BorderRadius.circular(radiusLG),
-                      ),
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          if (!await launchUrl(Uri.parse('https://github.com/Nahianether'))) {
-                            throw 'Could not launch GitHub profile';
-                          }
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.transparent,
-                          shadowColor: Colors.transparent,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: spacing32,
-                            vertical: spacing16,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(radiusLG),
-                          ),
-                        ),
-                        child: const Text(
-                          'View Projects',
-                          style: TextStyle(
-                            fontSize: textBase,
-                            fontWeight: FontWeight.w600,
-                            color: primaryColor,
-                            letterSpacing: 0.5,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                    ],
+                  ),
                 const SizedBox(height: spacing32),
                 if (!Responsive.isDesktop(context)) 
                   Container(

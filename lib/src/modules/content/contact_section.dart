@@ -139,7 +139,7 @@ class ContactBox extends StatelessWidget {
         // Modern Contact Form
         Container(
           constraints: const BoxConstraints(maxWidth: 800),
-          padding: const EdgeInsets.all(spacing48),
+          padding: EdgeInsets.all(Responsive.isDesktop(context) ? spacing48 : spacing24),
           decoration: BoxDecoration(
             gradient: cardGradient,
             borderRadius: BorderRadius.circular(radiusXXL),
@@ -162,109 +162,115 @@ class ContactBox extends StatelessWidget {
     Color accentColor,
     VoidCallback onTap,
   ) {
-    return Container(
-      width: 320,
-      padding: const EdgeInsets.all(spacing32),
-      decoration: BoxDecoration(
-        gradient: cardGradient,
-        borderRadius: BorderRadius.circular(radiusXXL),
-        boxShadow: shadowLG,
-        border: Border.all(
-          color: accentColor.withValues(alpha: 0.2),
-          width: 2,
-        ),
-      ),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(radiusXXL),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Icon Container with Glow Effect
-            Container(
-              width: 80,
-              height: 80,
-              padding: const EdgeInsets.all(spacing20),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    accentColor.withValues(alpha: 0.2),
-                    accentColor.withValues(alpha: 0.05),
-                  ],
-                ),
-                borderRadius: BorderRadius.circular(radiusXL),
-                border: Border.all(
-                  color: accentColor.withValues(alpha: 0.4),
-                  width: 2,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: accentColor.withValues(alpha: 0.3),
-                    blurRadius: 20,
-                    spreadRadius: 2,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isDesktop = Responsive.isDesktop(context);
+        
+        return Container(
+          width: isDesktop ? 320 : double.infinity,
+          padding: EdgeInsets.all(isDesktop ? spacing32 : spacing24),
+          decoration: BoxDecoration(
+            gradient: cardGradient,
+            borderRadius: BorderRadius.circular(radiusXXL),
+            boxShadow: shadowLG,
+            border: Border.all(
+              color: accentColor.withValues(alpha: 0.2),
+              width: 2,
+            ),
+          ),
+          child: InkWell(
+            onTap: onTap,
+            borderRadius: BorderRadius.circular(radiusXXL),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Icon Container with Glow Effect
+                Container(
+                  width: isDesktop ? 80 : 64,
+                  height: isDesktop ? 80 : 64,
+                  padding: EdgeInsets.all(isDesktop ? spacing20 : spacing16),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        accentColor.withValues(alpha: 0.2),
+                        accentColor.withValues(alpha: 0.05),
+                      ],
+                    ),
+                    borderRadius: BorderRadius.circular(radiusXL),
+                    border: Border.all(
+                      color: accentColor.withValues(alpha: 0.4),
+                      width: 2,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: accentColor.withValues(alpha: 0.3),
+                        blurRadius: 20,
+                        spreadRadius: 2,
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              child: Image.asset(
-                iconPath,
-                fit: BoxFit.contain,
-              ),
-            ),
-            const SizedBox(height: spacing24),
-            // Title
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: text2XL,
-                fontWeight: FontWeight.w700,
-                color: textPrimary,
-                letterSpacing: 0.5,
-              ),
-            ),
-            const SizedBox(height: spacing8),
-            // Subtitle
-            Text(
-              subtitle,
-              style: const TextStyle(
-                fontSize: textBase,
-                color: textSecondary,
-                fontWeight: FontWeight.w500,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: spacing24),
-            // Connect Button
-            Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: spacing24,
-                vertical: spacing12,
-              ),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [accentColor, accentColor.withValues(alpha: 0.8)],
-                ),
-                borderRadius: BorderRadius.circular(radiusLG),
-                boxShadow: [
-                  BoxShadow(
-                    color: accentColor.withValues(alpha: 0.4),
-                    blurRadius: 15,
-                    spreadRadius: 1,
+                  child: Image.asset(
+                    iconPath,
+                    fit: BoxFit.contain,
                   ),
-                ],
-              ),
-              child: const Text(
-                'Connect Now',
-                style: TextStyle(
-                  fontSize: textBase,
-                  fontWeight: FontWeight.w600,
-                  color: white,
-                  letterSpacing: 0.5,
                 ),
-              ),
+                SizedBox(height: isDesktop ? spacing24 : spacing16),
+                // Title
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: isDesktop ? text2XL : textXL,
+                    fontWeight: FontWeight.w700,
+                    color: textPrimary,
+                    letterSpacing: 0.5,
+                  ),
+                ),
+                SizedBox(height: isDesktop ? spacing8 : spacing6),
+                // Subtitle
+                Text(
+                  subtitle,
+                  style: TextStyle(
+                    fontSize: isDesktop ? textBase : textSM,
+                    color: textSecondary,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: isDesktop ? spacing24 : spacing16),
+                // Connect Button
+                Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: isDesktop ? spacing24 : spacing20,
+                    vertical: isDesktop ? spacing12 : spacing8,
+                  ),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [accentColor, accentColor.withValues(alpha: 0.8)],
+                    ),
+                    borderRadius: BorderRadius.circular(radiusLG),
+                    boxShadow: [
+                      BoxShadow(
+                        color: accentColor.withValues(alpha: 0.4),
+                        blurRadius: 15,
+                        spreadRadius: 1,
+                      ),
+                    ],
+                  ),
+                  child: Text(
+                    'Connect Now',
+                    style: TextStyle(
+                      fontSize: isDesktop ? textBase : textSM,
+                      fontWeight: FontWeight.w600,
+                      color: white,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

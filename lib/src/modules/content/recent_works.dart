@@ -135,58 +135,122 @@ class RecentWorks extends ConsumerWidget {
                     ],
                   ),
                   const SizedBox(height: spacing32),
-                  // Office Projects Grid
-                  Wrap(
-                    spacing: spacing16,
-                    runSpacing: spacing16,
-                    children: List.generate(
-                      officeProjects.length,
-                      (index) => Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: spacing20,
-                          vertical: spacing12,
-                        ),
-                        decoration: BoxDecoration(
-                          gradient: cardGradient,
-                          borderRadius: BorderRadius.circular(radiusLG),
-                          boxShadow: shadowSM,
-                          border: Border.all(
-                            color: secondaryColor.withValues(alpha: 0.2),
-                            width: 1,
+                  // Office Projects Grid - Mobile Responsive
+                  if (Responsive.isDesktop(context))
+                    Wrap(
+                      spacing: spacing16,
+                      runSpacing: spacing16,
+                      children: List.generate(
+                        officeProjects.length,
+                        (index) => Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: spacing20,
+                            vertical: spacing12,
+                          ),
+                          decoration: BoxDecoration(
+                            gradient: cardGradient,
+                            borderRadius: BorderRadius.circular(radiusLG),
+                            boxShadow: shadowSM,
+                            border: Border.all(
+                              color: secondaryColor.withValues(alpha: 0.2),
+                              width: 1,
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                width: 8,
+                                height: 8,
+                                decoration: BoxDecoration(
+                                  color: secondaryColor,
+                                  shape: BoxShape.circle,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: secondaryColor.withValues(alpha: 0.5),
+                                      blurRadius: 6,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(width: spacing12),
+                              Text(
+                                officeProjects[index],
+                                style: const TextStyle(
+                                  fontSize: textSM,
+                                  fontWeight: FontWeight.w600,
+                                  color: textPrimary,
+                                  letterSpacing: 0.3,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Container(
-                              width: 8,
-                              height: 8,
-                              decoration: BoxDecoration(
-                                color: secondaryColor,
-                                shape: BoxShape.circle,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: secondaryColor.withValues(alpha: 0.5),
-                                    blurRadius: 6,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(width: spacing12),
-                            Text(
-                              officeProjects[index],
-                              style: const TextStyle(
-                                fontSize: textSM,
-                                fontWeight: FontWeight.w600,
-                                color: textPrimary,
-                                letterSpacing: 0.3,
-                              ),
-                            ),
-                          ],
-                        ),
                       ),
+                    )
+                  else
+                    // Mobile: Grid with 2 columns
+                    GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 2.5,
+                        crossAxisSpacing: spacing12,
+                        mainAxisSpacing: spacing12,
+                      ),
+                      itemCount: officeProjects.length,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: spacing12,
+                            vertical: spacing8,
+                          ),
+                          decoration: BoxDecoration(
+                            gradient: cardGradient,
+                            borderRadius: BorderRadius.circular(radiusLG),
+                            boxShadow: shadowSM,
+                            border: Border.all(
+                              color: secondaryColor.withValues(alpha: 0.2),
+                              width: 1,
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                width: 6,
+                                height: 6,
+                                decoration: BoxDecoration(
+                                  color: secondaryColor,
+                                  shape: BoxShape.circle,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: secondaryColor.withValues(alpha: 0.5),
+                                      blurRadius: 4,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(width: spacing8),
+                              Expanded(
+                                child: Text(
+                                  officeProjects[index],
+                                  style: const TextStyle(
+                                    fontSize: textXS,
+                                    fontWeight: FontWeight.w600,
+                                    color: textPrimary,
+                                    letterSpacing: 0.3,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
                     ),
-                  ),
                 ],
               ),
             ),
@@ -377,7 +441,7 @@ class RecentWorks extends ConsumerWidget {
             physics: const NeverScrollableScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: Responsive.isDesktop(context) ? 3 : 1,
-              childAspectRatio: Responsive.isDesktop(context) ? 1.2 : 0.8,
+              childAspectRatio: Responsive.isDesktop(context) ? 1.2 : 1.4,
               crossAxisSpacing: spacing24,
               mainAxisSpacing: spacing24,
             ),
@@ -846,9 +910,17 @@ class RecentWorks extends ConsumerWidget {
                 ),
               ),
               
-              // Page numbers
-              ...List.generate(totalPages, (index) {
-                final pageNum = index + 1;
+              // Page numbers - Show fewer pages on mobile
+              ...List.generate(totalPages > 5 && !Responsive.isDesktop(context) ? 5 : totalPages, (index) {
+                int pageNum;
+                if (totalPages > 5 && !Responsive.isDesktop(context)) {
+                  // Show current page and 2 pages before/after on mobile
+                  int start = (currentPage - 2).clamp(1, totalPages - 4);
+                  pageNum = start + index;
+                } else {
+                  pageNum = index + 1;
+                }
+                
                 final isActive = pageNum == currentPage;
                 
                 return InkWell(
