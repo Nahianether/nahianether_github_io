@@ -1,0 +1,59 @@
+name: Deploy Flutter Web to VPS
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.24.3'
+        channel: 'stable'
+        
+    - name: Get dependencies
+      run: flutter pub get
+      
+    - name: Run tests
+      run: flutter test
+      
+    - name: Build web
+      run: flutter build web --release
+      
+    - name: Deploy to VPS
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USERNAME }}
+        key: ${{ secrets.VPS_SSH_KEY }}
+        port: ${{ secrets.VPS_PORT }}
+        script: |
+          # Navigate to your project directory
+          cd /var/www/intishar.xyz
+          
+          # Pull latest changes
+          git pull origin master
+          
+          # Build Flutter web
+          flutter build web --release
+          
+          # Copy build files to web server
+          sudo cp -r build/web/* /var/www/html/
+          
+          # Set proper permissions
+          sudo chown -R www-data:www-data /var/www/html/
+          sudo chmod -R 755 /var/www/html/
+          
+          # Restart nginx (optional)
+          sudo systemctl reload nginx
+          
+          echo "Deployment completed successfully!"
