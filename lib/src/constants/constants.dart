@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-const appName = 'flutter_app';
+const appName = 'Intishar-Ul Islam';
 
 // Ultra Modern Color Palette - 2024 Portfolio Design
 const Color white = Color(0xFFFFFFFF);
