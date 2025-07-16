@@ -151,8 +151,10 @@ class LoadingScreen extends ConsumerWidget {
             final progressBarWidth = isDesktop ? 300.0 : screenWidth * 0.8;
             
             return SafeArea(
-              child: Center(
-                child: SingleChildScrollView(
+              child: SizedBox(
+                width: screenWidth,
+                height: screenHeight,
+                child: Center(
                   child: Padding(
                     padding: EdgeInsets.symmetric(
                       horizontal: isDesktop ? spacing64 : spacing24,
@@ -160,6 +162,7 @@ class LoadingScreen extends ConsumerWidget {
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         // Main logo/title
                         FadeTransition(

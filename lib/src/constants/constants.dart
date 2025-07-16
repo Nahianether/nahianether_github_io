@@ -333,6 +333,7 @@ final topMenubarSectionKey = GlobalKey();
 final topIntroSectionKey = GlobalKey();
 final aboutSectionKey = GlobalKey();
 final recentWorksSectionKey = GlobalKey();
+final cvSectionKey = GlobalKey();
 final collaborationSectionKey = GlobalKey();
 final contactSectionKey = GlobalKey();
 final socialLinksSectionKey = GlobalKey();

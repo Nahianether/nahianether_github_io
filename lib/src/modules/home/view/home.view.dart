@@ -84,6 +84,14 @@ class Sidebar extends StatelessWidget {
                   }),
               const SizedBox(height: defaultPadding),
               TopBarButton(
+                  label: 'Resume',
+                  onPressed: () async {
+                    Navigator.pop(context);
+                    await Scrollable.ensureVisible(cvSectionKey.currentContext!,
+                        duration: const Duration(milliseconds: 1000), curve: Curves.easeInOutCubic);
+                  }),
+              const SizedBox(height: defaultPadding),
+              TopBarButton(
                   label: 'Contact',
                   onPressed: () async {
                     Navigator.pop(context);

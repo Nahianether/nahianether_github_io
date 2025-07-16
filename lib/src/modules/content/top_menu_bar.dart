@@ -122,6 +122,15 @@ class TopMenuBar extends StatelessWidget {
                   ),
                   const SizedBox(width: spacing32),
                   _buildNavButton(
+                    'Resume',
+                    () async => await Scrollable.ensureVisible(
+                      cvSectionKey.currentContext!,
+                      duration: const Duration(milliseconds: 800),
+                      curve: Curves.easeInOutCubic,
+                    ),
+                  ),
+                  const SizedBox(width: spacing32),
+                  _buildNavButton(
                     'Contact',
                     () async => await Scrollable.ensureVisible(
                       contactSectionKey.currentContext!,

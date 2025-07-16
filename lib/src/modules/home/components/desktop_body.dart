@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../constants/constants.dart';
 import '../../../providers/ui_providers.dart';
 import '../../content/contact_section.dart';
+import '../../content/cv_section.dart';
 import '../../content/footer.dart';
 import '../../content/k_divider.dart';
 import '../../content/recent_works.dart';
@@ -68,6 +69,8 @@ class DesktopBody extends ConsumerWidget {
                   const KDivider(),
                   RecentWorks(key: recentWorksSectionKey),
                   const SizedBox(height: defaultPadding * 2),
+                  const KDivider(),
+                  CVSection(key: cvSectionKey),
                   const KDivider(),
                   ContactSection(key: contactSectionKey),
                   const KDivider(),

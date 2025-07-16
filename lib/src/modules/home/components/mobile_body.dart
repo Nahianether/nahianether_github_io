@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../constants/constants.dart';
 import '../../../constants/size_config/responsive.dart';
 import '../../content/contact_section.dart';
+import '../../content/cv_section.dart';
 import '../../content/footer.dart';
 import '../../content/k_divider.dart';
 import '../../content/recent_works.dart';
@@ -32,6 +33,8 @@ class MobileBody extends StatelessWidget {
           const KDivider(),
           RecentWorks(key: recentWorksSectionKey),
           const SizedBox(height: defaultPadding * 2),
+          const KDivider(),
+          CVSection(key: cvSectionKey),
           const KDivider(),
           ContactSection(key: contactSectionKey),
           const KDivider(),
