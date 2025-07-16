@@ -1,0 +1,6 @@
+cd /var/www/intishar.xyz
+  git pull origin master
+  flutter build web --release
+  cp -r build/web/* /var/www/html/
+  chown -R www-data:www-data /var/www/html/
+  systemctl reload nginx
