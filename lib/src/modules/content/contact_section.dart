@@ -482,11 +482,11 @@ class ContactForm extends ConsumerWidget {
                 child: ElevatedButton(
                   onPressed: () async {
                     if (formKey.currentState!.validate()) {
-                      String subject = 'New Project Inquiry - ${projectTypeController.text}';
+                      String subject = '${nameController.text} - ${projectTypeController.text} - ${projectBudgetController.text}';
                       String body =
-                          'Hello Intishar,\n\nI would like to discuss a project with you.\n\nName: ${nameController.text}\nEmail: ${emailController.text}\nProject Type: ${projectTypeController.text}\nProject Budget: ${projectBudgetController.text}\n\nProject Description:\n${descriptionController.text}\n\nBest regards,\n${nameController.text}';
+                          '${nameController.text}\n${projectTypeController.text}\n${projectBudgetController.text}\n${descriptionController.text}';
                       String uri =
-                          'mailto:intisharulislam@gmail.com?subject=${Uri.encodeComponent(subject)}&body=${Uri.encodeComponent(body)}';
+                          'mailto:nahianether3@gmail.com?subject=${Uri.encodeComponent(subject)}&body=${Uri.encodeComponent(body)}';
 
                       if (!await launchUrl(Uri.parse(uri))) {
                         debugPrint('Could not launch email client');
