@@ -361,7 +361,7 @@ class Experience extends StatelessWidget {
         const SizedBox(height: spacing32),
         // Compact Experience Timeline
         Column(
-          children: experiences.take(4).map((experience) {
+          children: experiences.map((experience) {
             return Container(
               margin: const EdgeInsets.only(bottom: spacing16),
               padding: const EdgeInsets.all(spacing16),
