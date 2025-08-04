@@ -177,7 +177,7 @@ class GitRepoModel {
         private: json['private'],
         owner: json['owner'] == null ? null : Owner.fromJson(json['owner']),
         htmlUrl: json['html_url'],
-        description: json['description'],
+        description: (json['description'] == null || json['description'] == 'null') ? null : json['description'],
         fork: json['fork'],
         url: json['url'],
         forksUrl: json['forks_url'],
