@@ -2,37 +2,37 @@ name: Deploy Flutter Web to GitHub Pages
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    
+
     permissions:
       contents: write
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      
+
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.24.0'
-          channel: 'stable'
-      
+          flutter-version: "3.27.0"
+          channel: "stable"
+
       - name: Install dependencies
         run: flutter pub get
-      
+
       - name: Build web
         run: flutter build web --release --base-href "/"
-      
+
       - name: Copy build to docs folder
         run: |
           rm -rf docs
           cp -r build/web docs
-      
+
       - name: Commit and push
         run: |
           git config user.name github-actions
