@@ -1,59 +1,42 @@
-name: Deploy Flutter Web to VPS
+name: Deploy Flutter Web to GitHub Pages
 
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  workflow_dispatch:
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
     
+    permissions:
+      contents: write
+    
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v3
       
-    - name: Setup Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        flutter-version: '3.24.3'
-        channel: 'stable'
-        
-    - name: Get dependencies
-      run: flutter pub get
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.0'
+          channel: 'stable'
       
-    - name: Run tests
-      run: flutter test
+      - name: Install dependencies
+        run: flutter pub get
       
-    - name: Build web
-      run: flutter build web --release
+      - name: Build web
+        run: flutter build web --release --base-href "/"
       
-    - name: Deploy to VPS
-      uses: appleboy/ssh-action@v1.0.3
-      with:
-        host: ${{ secrets.VPS_HOST }}
-        username: ${{ secrets.VPS_USERNAME }}
-        key: ${{ secrets.VPS_SSH_KEY }}
-        port: ${{ secrets.VPS_PORT }}
-        script: |
-          # Navigate to your project directory
-          cd /var/www/intishar.xyz
-          
-          # Pull latest changes
-          git pull origin master
-          
-          # Build Flutter web
-          flutter build web --release
-          
-          # Copy build files to web server
-          sudo cp -r build/web/* /var/www/html/
-          
-          # Set proper permissions
-          sudo chown -R www-data:www-data /var/www/html/
-          sudo chmod -R 755 /var/www/html/
-          
-          # Restart nginx (optional)
-          sudo systemctl reload nginx
-          
-          echo "Deployment completed successfully!"
+      - name: Copy build to docs folder
+        run: |
+          rm -rf docs
+          cp -r build/web docs
+      
+      - name: Commit and push
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add docs
+          git commit -m "Deploy Flutter web build" || exit 0
+          git push
