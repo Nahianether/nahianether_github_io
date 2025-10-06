@@ -5,12 +5,14 @@ on:
     branches: [master]
   workflow_dispatch:
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
-    permissions:
-      contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -28,15 +30,14 @@ jobs:
       - name: Build web
         run: flutter build web --release --base-href "/"
 
-      - name: Copy build to docs folder
-        run: |
-          rm -rf docs
-          cp -r build/web docs
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
 
-      - name: Commit and push
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git add docs
-          git commit -m "Deploy Flutter web build" || exit 0
-          git push
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: "build/web"
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
