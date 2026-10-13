@@ -170,7 +170,7 @@ This project is open source and available under the MIT License.
 - **Company:** AKIJ iBOS Limited
 - **Location:** Dhaka, Bangladesh
 - **GitHub:** [@Nahianether](https://github.com/Nahianether)
-- **Portfolio:** [portfolio.int8bit.xyz](https://portfolio.int8bit.xyz/)
+- **Portfolio:** [intishar.xyz](https://intishar.xyz/)
 - **LinkedIn:** [nahinxp21](https://www.linkedin.com/in/nahinxp21/)
 - **Email:** Contact via GitHub or LinkedIn
 
